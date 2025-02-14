@@ -19,10 +19,7 @@ function setup() {
 
 function draw() {
   background(89, 211, 255);
-  //sun
-  fill(255, 255, 0);
-  triangle(width*0.85, height*0.15, width*0.90);
-  circle(sunX, sunY, 100);
+  sunMovement();
 
 
   // Sky / Clouds
@@ -49,14 +46,11 @@ function draw() {
 
 
   //--- DEV VIEW ----
-  // Suncurve
-  
-
   // Pos/Frame
   fill(0, 0, 0);
-  textSize(20);
+  textSize((height*0.015)+(width*0.015));
   if (mouseX > width/2) {
-    mouse2X = mouseX - 110;
+    mouse2X = mouseX - 95;
   } else {
     mouse2X = mouseX;
   }
@@ -65,6 +59,38 @@ function draw() {
   if (frameCount >= 60) {
     frameCount = 0;
   }
+
+}
+
+function sunMovement() {
+  fill(255, 255, 0);
+  triangle(width*0.85, height*0.15, width*0.90);
+
+  // Suncurve
+  
+  noFill();
+  //  ctrlX ctrlY anchorX anchorY  anchorX   anchorY    ctrlX    ctrlY  
+  curve(0, height*2, 0, height*0.4, width, height*0.4, width, height*2);
+
+
+  strokeWeight(1);
+  stroke(1);
+  let t = 0.5 * sin(mouseX * 0.01) + 0.5;
+  //              x:anchor ctrl ctrl  anchor   
+  let x = curvePoint(0, 0, width, width, t);
+  //              y:anchor ctrl ctrl anchor
+  let y = curvePoint(height*0.4, height*2, height*2, height*0.4, t);
+  // 0, 150
+  // 395, 45
+  // 797 , 150
+
+  //width = 797
+  // height = 337
+
+  //Sun
+  fill(255, 255, 0);
+  triangle(width*0.85, height*0.15, width*0.90);
+  circle(x, y, (width*0.05)+(height*0.05));
 
 }
 
