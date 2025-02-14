@@ -4,19 +4,25 @@
 //
 // And interactive scene that allows your to use both mouse and keyboard inputs to change and interact with the screen
 let count = 0;
+let sunX;
+let sunY;
+let mouse2X;
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
-
+  sunX = width*0.93;
+  sunY = height*0.15;
+  mouse2X = mouseX;
 }
 
 function draw() {
   background(89, 211, 255);
   //sun
   fill(255, 255, 0);
-  arc(width*0.93, height*0.15, 120, 120, 0, PI*2, PIE, 2);
-  circle(width*0.93, height*0.15, 100);
+  triangle(width*0.85, height*0.15, width*0.90);
+  circle(sunX, sunY, 100);
 
 
   // Sky / Clouds
@@ -41,15 +47,41 @@ function draw() {
   ellipse(width*0.75, height*1.15, width*0.90, height*0.70);
 
 
+
+  //--- DEV VIEW ----
+  // Suncurve
   
 
-  // particalSystem();
+  // Pos/Frame
   fill(0, 0, 0);
   textSize(20);
-  text(frameCount, mouseX, mouseY);
+  if (mouseX > width/2) {
+    mouse2X = mouseX - 110;
+  } else {
+    mouse2X = mouseX;
+  }
+  text(frameCount + " [" + mouseX + ":" + mouseY + "]", mouse2X, mouseY);
+
   if (frameCount >= 60) {
     frameCount = 0;
   }
+
+}
+
+function keyPressed() {
+  // Sun up
+  // background(89, 211, 255);
+  // sunX = width*0.93;
+  // sunY = height*0.15;
+  
+  // Sun setting
+  // sunX = width*0.93;
+  // sunY = height*0.15;
+
+  // Sun gone
+  // sunX = width;
+  // sunY = height;
+
 }
 
 // function particalSystem() {
