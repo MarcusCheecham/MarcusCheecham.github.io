@@ -69,17 +69,17 @@ function sunMovement() {
   // Suncurve
   
   noFill();
-  //  ctrlX ctrlY anchorX anchorY  anchorX   anchorY    ctrlX    ctrlY  
-  curve(0, height*2, 0, height*0.4, width, height*0.4, width, height*2);
+  //  ctrlX ctrlY anchorX anchorY | anchorX   anchorY    ctrlX    ctrlY  
+  curve(0-(width*0.15), height*2, 0, height*0.4, width, height*0.4, width, height*2);
 
 
   strokeWeight(1);
   stroke(1);
-  let t = 0.5 * sin(mouseX * 0.01) + 0.5;
+  let t = 0.5 * tan(mouseX * 0.002);
   //              x:anchor ctrl ctrl  anchor   
-  let x = curvePoint(0, 0, width, width, t);
+  let sunX = curvePoint(0-(width*0.22), 0, width, width, t);
   //              y:anchor ctrl ctrl anchor
-  let y = curvePoint(height*0.4, height*2, height*2, height*0.4, t);
+  let sunY = curvePoint(height*2, height*0.4, height*0.4, height*2, t);
   // 0, 150
   // 395, 45
   // 797 , 150
@@ -90,7 +90,23 @@ function sunMovement() {
   //Sun
   fill(255, 255, 0);
   triangle(width*0.85, height*0.15, width*0.90);
-  circle(x, y, (width*0.05)+(height*0.05));
+  circle(sunX, sunY, (width*0.05)+(height*0.05));
+
+
+  // --- Moon ---
+
+  // Mood curve
+
+  t = 0.5 * tan(mouseX * 0.00185) + 1.5
+
+  let moonX = curvePoint(0-(width*0.22), 0, width, width, t);
+  //              y:ctrl anchor anchor ctrl
+  let moonY = curvePoint(height*2, height*0.4, height*0.4, height*2, t);
+
+
+  fill(200)
+  circle(moonX+width*0.01, moonY + width )
+  circle(moonX, moonY, (width*0.05)+(height*0.05))
 
 }
 
