@@ -4,27 +4,28 @@
 //
 // And interactive scene that allows your to use both mouse and keyboard inputs to change and interact with the screen
 let count = 0;
-let sunX;
-let sunY;
 let mouse2X;
+let timeValue;
 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
-  sunX = width*0.93;
-  sunY = height*0.15;
   mouse2X = mouseX;
 }
 
 function draw() {
-  background(89, 211, 255);
-  sunMovement();
+  timeValue = map(mouseX, 0 + width/5, width, 155, 10, true);
+
+
+
+  background(89 - timeValue, 211 - timeValue, 255 - timeValue);
+  sunsMovement();
 
 
   // Sky / Clouds
   noStroke();
-  fill(255);
+  fill(255 - timeValue);
   rotate(50.5);
   ellipse(width*0.11, height*0.04, width*0.10, height*0.10);
   rotate(-101);
@@ -36,11 +37,11 @@ function draw() {
 
   // Ground
   stroke(1);
-  fill(0, 200, 0);
+  fill(0, 200 - timeValue, 0);
   ellipse(width*0.65, height*0.85, width*0.90, height*0.70);
-  fill(0, 230, 0);
+  fill(0, 230 - timeValue, 0);
   ellipse(width*0.25, height, width*0.90, height*0.70);
-  fill(0, 255, 0);
+  fill(0, 255 - timeValue, 0);
   ellipse(width*0.75, height*1.15, width*0.90, height*0.70);
 
 
@@ -50,7 +51,7 @@ function draw() {
   fill(0, 0, 0);
   textSize((height*0.015)+(width*0.015));
   if (mouseX > width/2) {
-    mouse2X = mouseX - 95;
+    mouse2X = mouseX - width*0.15;
   } else {
     mouse2X = mouseX;
   }
@@ -62,7 +63,7 @@ function draw() {
 
 }
 
-function sunMovement() {
+function sunsMovement() {
   fill(255, 255, 0);
   triangle(width*0.85, height*0.15, width*0.90);
 
@@ -75,10 +76,10 @@ function sunMovement() {
 
   strokeWeight(1);
   stroke(1);
-  let t = 0.5 * tan(mouseX * 0.002);
-  //              x:anchor ctrl ctrl  anchor   
+  let t = norm(mouseX, width/2, width*1.15);
+  //              x:ctrl anchor anchor ctrl  
   let sunX = curvePoint(0-(width*0.22), 0, width, width, t);
-  //              y:anchor ctrl ctrl anchor
+  //              y:ctrl anchor anchor ctrl
   let sunY = curvePoint(height*2, height*0.4, height*0.4, height*2, t);
   // 0, 150
   // 395, 45
@@ -97,16 +98,19 @@ function sunMovement() {
 
   // Mood curve
 
-  t = 0.5 * tan(mouseX * 0.00185) + 1.5
+  t = norm(mouseX, width/2, 0 - width*0.15);
 
-  let moonX = curvePoint(0-(width*0.22), 0, width, width, t);
+  let moonX = curvePoint(width, width, 0, 0-(width*0.22), t);
   //              y:ctrl anchor anchor ctrl
   let moonY = curvePoint(height*2, height*0.4, height*0.4, height*2, t);
 
 
-  fill(200)
-  circle(moonX+width*0.01, moonY + width )
-  circle(moonX, moonY, (width*0.05)+(height*0.05))
+  fill(180);
+  circle(moonX, moonY, (width*0.05)+(height*0.05));
+  noStroke();
+  fill(120);
+  circle(moonX+(width*0.005), moonY-(height*0.02), (width*0.01)+(height*0.01));
+  ellipse(moonX-(width*0.005), moonY+(height*0.02),(width*0.01)+(height*0.01), (width*0.01)+(height*0.01));
 
 }
 
@@ -130,7 +134,7 @@ function keyPressed() {
 //   let snow = [];
 //   let snowPos = [];
 //   for (count <= 1; count++) {
-//     fill(0, 0, 255)
+//     fill(0, 0, 255);
 //     snow.push(circle(random(0, width), 0, 10));
 //   }
 //   fill(255, 0, 0);
