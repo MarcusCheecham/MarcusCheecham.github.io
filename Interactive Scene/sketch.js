@@ -3,25 +3,24 @@
 // Febuary 11th, 2025
 //
 // And interactive scene that allows your to use both mouse and keyboard inputs to change and interact with the screen
-let count = 0;
 let mouse2X;
 let timeValue;
+let x;
+let y;
 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
   mouse2X = mouseX;
+  y = height/2;
+  x = width/2;
 }
 
 function draw() {
   timeValue = map(mouseX, 0 + width/5, width, 155, 10, true);
-
-
-
   background(89 - timeValue, 211 - timeValue, 255 - timeValue);
   sunsMovement();
-
 
   // Sky / Clouds
   noStroke();
@@ -60,6 +59,29 @@ function draw() {
   if (frameCount >= 60) {
     frameCount = 0;
   }
+
+  player();
+
+}
+
+function player() {
+fill(255)
+line(x, y + height*0.10, x + width*0.02, y + height*0.15)
+line(x, y + height*0.10, x - width*0.02, y + height*0.15)
+line(x, y + height*0.05, x - width*0.02, y)
+line(x, y + height*0.05, x + width*0.02, y)
+line(x, y, x, y + height*0.10)
+circle(x, y, 50);
+curve (x - width*0.01, y - height*0.01, x - width*0.005, y + height*0.01, x + width*0.005, y + height*0.01, x + width*0.01, y - height*0.01)
+fill(0)
+circle(x - width*0.005, y - height*0.005, 15)
+circle(x + width*0.005, y - height*0.005, 15)
+
+if (keyIsDown(LEFT_ARROW)) {
+  x-= 20
+} else if (keyIsDown(RIGHT_ARROW)) {
+  x+= 20
+}
 
 }
 
