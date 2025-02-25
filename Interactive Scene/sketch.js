@@ -65,23 +65,23 @@ function draw() {
 }
 
 function player() {
-fill(255)
-line(x, y + height*0.10, x + width*0.02, y + height*0.15)
-line(x, y + height*0.10, x - width*0.02, y + height*0.15)
-line(x, y + height*0.05, x - width*0.02, y)
-line(x, y + height*0.05, x + width*0.02, y)
-line(x, y, x, y + height*0.10)
-circle(x, y, 50);
-curve (x - width*0.01, y - height*0.01, x - width*0.005, y + height*0.01, x + width*0.005, y + height*0.01, x + width*0.01, y - height*0.01)
-fill(0)
-circle(x - width*0.005, y - height*0.005, 15)
-circle(x + width*0.005, y - height*0.005, 15)
+  fill(255);
+  line(x, y + height*0.10, x + width*0.02, y + height*0.15);
+  line(x, y + height*0.10, x - width*0.02, y + height*0.15);
+  line(x, y + height*0.05, x - width*0.03, y);
+  line(x, y + height*0.05, x + width*0.03, y);
+  line(x, y, x, y + height*0.10);
+  circle(x, y, height*0.025 + width*0.025);;
+  curve (x - width*0.01, y - height*0.01, x - width*0.005, y + height*0.01, x + width*0.005, y + height*0.01, x + width*0.01, y - height*0.01);
+  fill(0);
+  circle(x - width*0.005, y - height*0.005,  height*0.005 + width*0.005);
+  circle(x + width*0.005, y - height*0.005,  height*0.005 + width*0.005);
 
-if (keyIsDown(LEFT_ARROW)) {
-  x-= 20
-} else if (keyIsDown(RIGHT_ARROW)) {
-  x+= 20
-}
+  if (keyIsDown(LEFT_ARROW)) {
+    x-= width*0.01;
+  } else if (keyIsDown(RIGHT_ARROW)) {
+    x+= width*0.01;
+  }
 
 }
 
@@ -100,7 +100,7 @@ function sunsMovement() {
   stroke(1);
   let t = norm(mouseX, width/2, width*1.15);
   //              x:ctrl anchor anchor ctrl  
-  let sunX = curvePoint(0-(width*0.22), 0, width, width, t);
+  let sunX = curvePoint(0- width*0.22, 0, width, width, t);
   //              y:ctrl anchor anchor ctrl
   let sunY = curvePoint(height*2, height*0.4, height*0.4, height*2, t);
   // 0, 150
@@ -113,7 +113,7 @@ function sunsMovement() {
   //Sun
   fill(255, 255, 0);
   triangle(width*0.85, height*0.15, width*0.90);
-  circle(sunX, sunY, (width*0.05)+(height*0.05));
+  circle(sunX, sunY, width*0.05 + height*0.05);
 
 
   // --- Moon ---
@@ -122,13 +122,13 @@ function sunsMovement() {
 
   t = norm(mouseX, width/2, 0 - width*0.15);
 
-  let moonX = curvePoint(width, width, 0, 0-(width*0.22), t);
+  let moonX = curvePoint(width, width, 0, 0 - width*0.22, t);
   //              y:ctrl anchor anchor ctrl
   let moonY = curvePoint(height*2, height*0.4, height*0.4, height*2, t);
 
 
   fill(180);
-  circle(moonX, moonY, (width*0.05)+(height*0.05));
+  circle(moonX, moonY, width*0.05 + height*0.05);
   noStroke();
   fill(120);
   circle(moonX+(width*0.005), moonY-(height*0.02), (width*0.01)+(height*0.01));
