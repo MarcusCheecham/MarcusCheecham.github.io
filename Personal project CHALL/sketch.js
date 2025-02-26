@@ -6,13 +6,15 @@
 // - describe what you did to take this project "above and beyond"
 
 let i = 1;
+let colour;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
-  background(0, 0, 255);
+  background(50);
+  // noStroke();
 
   i = 1;
   drawTopHalf();
@@ -24,21 +26,13 @@ function draw() {
 function drawTopHalf() {
 
   for (let x = width*0.05; x <= width; x+= width*0.05) {
-    switch(i) {
-
-    case 1:
-      fill(255, 0, 0);
-      break;
-
-    case 2:
-      fill(0, 255, 0,);
-      break;
-
-    case 3:
-      fill(0, 0, 255);
-      i = 0;
-      break;
+    if (x < width/2) {
+      colour = map(x, 0, width/2, 50, 255/2, true);
+    } else {
+      colour = map(x, width/2, width, 255/2, 50, true);
     }
+
+    fill(colour);
     triangle(x - width*0.05, 0, x, 0, mouseX, mouseY);
     i++;
   }
@@ -50,21 +44,8 @@ function drawTopHalf() {
 
 function drawRightHalf() {
   for (let y = height*0.10; y <= height; y+= height*0.10) {
-    switch(i) {
-
-    case 1:
-      fill(255, 0, 0);
-      break;
-  
-    case 2:
-      fill(0, 255, 0,);
-      break;
-  
-    case 3:
-      fill(0, 0, 255);
-      i = 0;
-      break;
-    }
+    colour = map(y, 0, height, 50, 255/2);
+    fill(colour);
     triangle(width, y - height*0.10, width, y, mouseX, mouseY);
     i++;
   }
@@ -76,21 +57,13 @@ function drawRightHalf() {
 
 function drawBottomHalf() {
   for (let x = width*0.95; x >= 0; x-= width*0.05) {
-    switch(i) {
-
-    case 1:
-      fill(255, 0, 0);
-      break;
-  
-    case 2:
-      fill(0, 255, 0,);
-      break;
-  
-    case 3:
-      fill(0, 0, 255);
-      i = 0;
-      break;
+    if (x < width/2) {
+      colour = map(x, 0, width/2, 255/2, 255/1.25, true);
+    } else {
+      colour = map(x, width/2, width, 255/1.25, 255/2, true);
     }
+
+    fill(colour);
     triangle(x + width*0.05, height, x, height, mouseX, mouseY);
     i++;
   }
@@ -102,21 +75,8 @@ function drawBottomHalf() {
 
 function drawLeftHalf() {
   for (let y = height*0.90; y >= 0; y-= height*0.10) {
-    switch(i) {
-
-    case 1:
-      fill(255, 0, 0);
-      break;
-  
-    case 2:
-      fill(0, 255, 0,);
-      break;
-  
-    case 3:
-      fill(0, 0, 255);
-      i = 0;
-      break;
-    }
+    colour = map(y, 0, height, 50, 255/2);
+    fill(colour);
     triangle(0, y + height*0.10, 0, y, mouseX, mouseY);
     i++;
   }
