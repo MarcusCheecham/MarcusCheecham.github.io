@@ -5,8 +5,8 @@
 let x = 0;
 let y = 0;
 let direction = 0;
-let speed = 1;
-let size = 5;
+let speed = 15;
+let size = 25;
 
 
 function setup() {
@@ -27,10 +27,10 @@ function Johnson() {
   // Size
   if (keyIsDown(68) === true && size < 50) {
     size++;
-    if ( x !== 0){
+    if ( x === width - size - 1 ||  x === width - size + 1){
       x--;
     }
-    if(y !== 0){
+    if(y !== width - size && y !== 0){
       y--;
     }
   } 
@@ -38,11 +38,11 @@ function Johnson() {
     
   if (keyIsDown(65) === true && size > 5) {
     size--;
-    if ( x !== 0){
+    if ( x === width - size - 1 ||  x === width - size + 1){
       x++;
     }
     
-    if(y !== 0){
+    if(y !== width - size && y !== 0){
       y++;
     }
   }
@@ -52,7 +52,7 @@ function Johnson() {
     speed++;
   }
     
-  if (keyIsDown(83) === true && speed > 0) {
+  if (keyIsDown(83) === true && speed > 1) {
     speed--;
   }
 
