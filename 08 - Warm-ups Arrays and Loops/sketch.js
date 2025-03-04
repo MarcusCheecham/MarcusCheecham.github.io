@@ -46,7 +46,7 @@ function circleX() {
   for (pos1 = 0; pos1 <= width; pos1+= width/10) {
     circle(pos1, pos1, size);
     circle(pos2, pos1, size);
-    pos2 -= width/10;
+    pos2 -= width/10; 
   }
 
 }
