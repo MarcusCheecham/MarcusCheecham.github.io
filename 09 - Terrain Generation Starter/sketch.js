@@ -2,7 +2,7 @@
 // Marcus Cheecham
 // March 4th, 2025
 
-let rectWidth = 30;
+let rectWidth = 30; 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
