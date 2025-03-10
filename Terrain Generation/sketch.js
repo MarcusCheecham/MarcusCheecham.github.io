@@ -1,17 +1,15 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// Terrain Generation
+// Marcus Cheecham
+// March 10th 2025
 
-let rectWidth = 5;
+let rectWidth = 1;
 let mySeed;
-let noiseStart = 0;
-let noiseSpeed = 0.005;
+let noiseStart = 1;
+let noiseSpeed = 0.01;
 let noiseTime;
 let tallestPoint;
 let flagX;
+let smallestPoint;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -46,20 +44,44 @@ function generateTerrain() {
     //calculate the other corners of our rectangle
     let x2 = x +  rectWidth;
     let y2 = height - rectHeight;
-
+    fill(150);
     rect(x, height, x2, y2);
 
-    if (y2 < tallestPoint) {
+    if (y2 >= smallestPoint) {
+      smallestPoint = y2;
+    }
+
+    if (y2 <= tallestPoint) {
       tallestPoint = y2; flagX = x;
     }
 
-    placeFlag(flagX, tallestPoint);
     noiseTime += noiseSpeed;
   }
+
+  placeFlag(flagX, tallestPoint);
+
   rectMode(CORNER);
+  averageHeight();
 }
 
 function placeFlag(x, y) {
+  fill(255);
   circle(x, y, 50);
-
 }
+
+function averageHeight() {
+  fill(0, 255, 0);
+  stroke(1);
+  line(0, (smallestPoint + tallestPoint)/2, width, (smallestPoint + tallestPoint)/2);
+}
+
+function keyReleased() {
+  if (keyCode === 37 && rectWidth > 1) {
+    rectWidth--;
+  }
+
+  if (keyCode === 39 && rectWidth < width) {
+    rectWidth++;
+  }
+}
+
