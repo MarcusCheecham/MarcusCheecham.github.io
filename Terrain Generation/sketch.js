@@ -5,11 +5,12 @@
 let rectWidth = 1;
 let mySeed;
 let noiseStart = 1;
-let noiseSpeed = 0.01;
+let noiseSpeed = 0.001;
 let noiseTime;
 let tallestPoint;
 let flagX;
-let smallestPoint;
+let xSum;
+let rectHeight;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -38,7 +39,7 @@ function generateTerrain() {
     //generate a random height.
     //change this from using random() to noise()
 
-    let rectHeight = noise(noiseTime);
+    rectHeight = noise(noiseTime);
     rectHeight = round(map(rectHeight, 0, 1, height*0.15, height*0.95));
 
     //calculate the other corners of our rectangle
@@ -47,32 +48,41 @@ function generateTerrain() {
     fill(150);
     rect(x, height, x2, y2);
 
-    if (y2 >= smallestPoint) {
-      smallestPoint = y2;
-    }
-
     if (y2 <= tallestPoint) {
       tallestPoint = y2; flagX = x;
     }
 
     noiseTime += noiseSpeed;
+
+    xSum += y2;
   }
 
   placeFlag(flagX, tallestPoint);
 
   rectMode(CORNER);
   averageHeight();
+  xSum = 0;
 }
 
 function placeFlag(x, y) {
   fill(255);
-  circle(x, y, 50);
+  stroke(1);
+  strokeWeight(height*0.00075+width*0.00075);
+  stroke(255, 0, 0);
+  // line(x, y, x, y*0.85);
+  // triangle(x, y*0.85, x*1.05, y*0.90, x, y*0.95);
+
+  line(x, y, x, rectHeight / y*50);
+
+
+  // circle(x, y, height*0.025+width*0.025);
 }
 
 function averageHeight() {
-  fill(0, 255, 0);
   stroke(1);
-  line(0, (smallestPoint + tallestPoint)/2, width, (smallestPoint + tallestPoint)/2);
+  strokeWeight(height*0.003+width*0.003);
+  stroke(255, 0, 0);
+  line(0, xSum/(width/rectWidth), width, xSum/(width/rectWidth));
 }
 
 function keyReleased() {
