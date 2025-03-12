@@ -34,7 +34,7 @@ function renderGrid() {
       // set fill value proxy to mouse
       let alpha = map(d, 0, 150, 255, 0);
 
-      if (d >= 150) {
+      if (d > 150) {
         noFill();
       } else {
         if (d < 100) {
