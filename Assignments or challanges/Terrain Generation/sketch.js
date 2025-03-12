@@ -3,14 +3,14 @@
 // March 10th 2025
 
 let rectWidth = 1;
+let rectHeight;
+
 let mySeed;
 let noiseStart = 1;
 let noiseSpeed = 0.001;
 let noiseTime;
-let tallestPoint;
-let flagX;
+
 let xSum;
-let rectHeight;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -33,7 +33,8 @@ function generateTerrain() {
   // use a loop to generate and draw several rectangles side to side to look like some 2D terrain
   rectMode(CORNERS);
 
-  tallestPoint = Infinity;
+  let tallestPoint = Infinity;
+  let flagX;
 
   for (let x = 0; x < width; x += rectWidth) {
     //generate a random height.
@@ -68,11 +69,11 @@ function placeFlag(x, y) {
   fill(255);
   stroke(1);
   strokeWeight(height*0.00075+width*0.00075);
-  stroke(255, 0, 0);
+  stroke(0);
   // line(x, y, x, y*0.85);
   // triangle(x, y*0.85, x*1.05, y*0.90, x, y*0.95);
-
-  line(x, y, x, rectHeight / y*50);
+  line(x, y, x, y - height*0.045);
+  triangle(x, y - height*0.025, x, y - height*0.045, x + width*0.010, y - height*0.035);
 
 
   // circle(x, y, height*0.025+width*0.025);

@@ -80,7 +80,7 @@ function drawLeftHalf() {
     triangle(0, y + height*0.10, 0, y, mouseX, mouseY);
     i++;
   }
-  for (y = height; y>= 0; y-= height*0.10) {
+  for (y = height; y >= 0; y-= height*0.10) {
     fill(255);
     circle(0, y, width*0.007 + height*0.007);
   }
