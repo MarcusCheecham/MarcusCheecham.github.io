@@ -6,16 +6,28 @@
 // 2. use a loop to generate 20+ skinny books (can be all named the same if needed)
 
 let myBook;
+let bookshelf = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  // make 20 books in a row
+  let x = 0.3;
+  let covers = ["softcover", "hardcover", "lethercover"];
+  for (let i = 0; i < 20; i++) {
+    let choice = int(random(3));
+    bookshelf.push(new Book("A", "Mr. Booth", 789071240973), covers[choice], 515, width * x);
+    x+= 0.025;
+  }
+
   myBook = new Book("CS30 Text", "Mr. Scott", 1234567891011, "leatherbound", 515, width * 0.3);
   myBook.printOut();
 }
 
 function draw() {
   background(220); //clears the screen each frame
-  myBook.display();
+  for (let i = 0; i < bookshelf.length; i++) {
+    bookshelf[i].display();
+  }
 }
 
 // Nice to organize class at the bottom...
