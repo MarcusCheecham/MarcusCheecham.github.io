@@ -25,6 +25,7 @@ function draw() {
   vehicleDisplayTest();
 }
 
+
 function drawRoad() {
   rectMode(CORNERS);
   fill(50);
@@ -48,7 +49,32 @@ function vehicleDisplayTest() {
 
   push();
   translate(-width*0.05, -height*0.04);
-  rect(x, y, width*0.1, height*0.075);
+
+  // CAR
+
+  // fill(110);
+  // rect(x*1.01, y*0.98, width*0.020, height*0.095);
+  // rect(x*1.15, y*0.98, width*0.020, height*0.095);
+  // fill(random(255), random(255), random(255)); // RANDOM COLOUR
+  // rect(x, y, width*0.1, height*0.075);
+
+  // // Westbound
+
+  // fill(200, 200, 0);
+  // rect(x, y, width*0.008, height*0.020, 0, 0, 10, 0);
+  // rect(x, y*1.108, width*0.008, height*0.020, 0, 10, 0, 0);
+
+
+  // // Eastbound
+
+  // fill(200, 200, 0);
+  // rect(x*1.184, y, width*0.008, height*0.020, 0, 0, 0, 10);
+  // rect(x*1.184, y*1.108, width*0.008, height*0.020, 10, 0, 0, 0);
+
+  // TRUCK
+
+  rect(x, y, );
+
   pop();
 
 }
@@ -67,9 +93,38 @@ class Vehicle {
 
     fill(this.colour);
     switch(vehicleTypesAmount) {
-    case 1:
+    case 1: // Car
+      push();
+      translate(-width*0.05, -height*0.04);
+      fill(110);
+      rect(this.xPos*1.01, this.yPos*0.98, width*0.020, height*0.095);
+      rect(this.xPos*1.15, this.yPos*0.98, width*0.020, height*0.095);
+      fill(this.colour); // RANDOM COLOUR
+      rect(this.xPos, this.yPos, width*0.1, height*0.075);
+    
+      if (this.direction === 1) {
+        // Eastbound
 
+        fill(200, 0, 0);
+        rect(this.xPos, this.yPos, width*0.008, height*0.020, 0, 0, 10, 0);
+        rect(this.xPos, this.yPos*1.108, width*0.008, height*0.020, 0, 10, 0, 0);
+      
+        fill(200, 200, 0);
+        rect(this.xPos*1.184, this.yPos, width*0.008, height*0.020, 0, 0, 0, 10);
+        rect(this.xPos*1.184, this.yPos*1.108, width*0.008, height*0.020, 10, 0, 0, 0);
+      } else {
+        // Westbound
+    
+        fill(200, 200, 0);
+        rect(this.xPos, this.yPos, width*0.008, height*0.020, 0, 0, 10, 0);
+        rect(this.xPos, this.yPos*1.108, width*0.008, height*0.020, 0, 10, 0, 0);
+    
+        fill(200, 0, 0);
+        rect(this.xPos*1.184, this.yPos, width*0.008, height*0.020, 0, 0, 0, 10);
+        rect(this.xPos*1.184, this.yPos*1.108, width*0.008, height*0.020, 10, 0, 0, 0);
+      }
     case 2:
+
     }
   }
 
@@ -95,18 +150,19 @@ class Vehicle {
 
   changeColor() {
     this.colour = (random(255), random(255), random(255));
+    
   }
 
   action() {
     this.move();
 
-    if(random(1, 100) === 100) {
+    if(random(99) === 99) {
       this.speedUp();
     }
-    if(random(1, 100) === 100) {
+    if(random(99) === 99) {
       this.speedDown();
     }
-    if(random(1, 100) === 100) {
+    if(random(99) === 99) {
       this.changeColor();
     }
 
