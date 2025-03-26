@@ -44,9 +44,9 @@ function cameraControls() {
     }
 
     if (turningDegree <= -1) {
-      turningDegree = 360 - 2;
+      turningDegree = 358;
     } else if (turningDegree >= 361) {
-      turningDegree = 0 + 2;
+      turningDegree = 2;
     }
 
     if (keyIsDown(UP_ARROW) === true) {
