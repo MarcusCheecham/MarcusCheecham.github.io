@@ -57,10 +57,19 @@ function cameraControls() {
     }
 
     if (keyIsDown(87) === true) {
-      playerZ-= 10;
 
-      playerZ += (sin(turningDegree) * cos(turningDegree)) * 2;
-      playerX += (sin(turningDegree) * cos(turningDegree)) * 2;
+      if (turningDegree >= 0 && turningDegree <= 180) {
+        playerX -= (sin(turningDegree) * cos(turningDegree + 90)) * 10;
+      } else {
+        playerX += (sin(turningDegree) * cos(turningDegree + 90)) * 10;
+      }
+  
+      if (turningDegree <= 90 && turningDegree >= 270) {
+        playerZ -= (sin(turningDegree) * cos(turningDegree + 90)) * 10;
+      } else {
+        playerZ += (sin(turningDegree) * cos(turningDegree + 90)) * 10;
+      }
+  
 
     }
     if (keyIsDown(83) === true) {
