@@ -11,6 +11,7 @@ let vehicleTypesAmount = 2;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES);
   for(let i = 0; i < 20; i++) {
     eastbound.push(new Vehicle(random(1, vehicleTypesAmount + 1), 0, random(height*0.45, height*0.70), (random(255), random(255), random(255)), 1, random(15)));
   }
@@ -44,8 +45,8 @@ function drawRoad() {
 }
 
 function vehicleDisplayTest() {
-  let x = width/2;
-  let y = height/2;
+  let xPos = width/2;
+  let yPos = height/2;
 
   push();
   translate(-width*0.05, -height*0.04);
@@ -71,9 +72,48 @@ function vehicleDisplayTest() {
   // rect(x*1.184, y, width*0.008, height*0.020, 0, 0, 0, 10);
   // rect(x*1.184, y*1.108, width*0.008, height*0.020, 10, 0, 0, 0);
 
+
   // TRUCK
 
-  rect(x, y, );
+  // Westbound
+
+  // Body
+  fill("grey");
+  rect(xPos*1.075, yPos*1.0515, width*0.02, height*0.025);
+  fill(255, 255, 255);
+  rect(xPos*1.0925, yPos, width*0.09, height*0.080);
+  rect(xPos, yPos, width*0.04, height*0.080, 10, 0, 0, 10);
+
+  // Backlights
+  fill(200, 0, 0);
+  rect(xPos*1.2525, yPos, width*0.01, height*0.010, 0, 0, 0, 10);
+  rect(xPos*1.2525, yPos*1.14, width*0.01, height*0.010, 10, 0, 0, 0);
+
+  // Headlights
+  fill(200, 200, 0);
+  rect(xPos, yPos, width*0.005, height*0.02, 0, 0, 10, 0);
+  rect(xPos, yPos*1.12, width*0.005, height*0.02, 0, 10, 0, 0);
+
+
+  // Eastbound
+
+  // Body
+  // fill("grey");
+  // rect(xPos*1.180, yPos*1.0515, width*0.02, height*0.025);
+  // fill(255, 255, 255);
+  // rect(xPos, yPos, width*0.09, height*0.080);
+  // rect(xPos*1.190, yPos, width*0.04, height*0.080, 0, 10, 10, 0);
+
+  // Headlights
+  // fill(200, 200, 0);
+  // rect(xPos*1.26, yPos, width*0.005, height*0.02, 0, 10, 0, 0);
+  // rect(xPos*1.26, yPos*1.12, width*0.005, height*0.02, 0, 0, 10, 0);
+
+  // Backlights
+  // fill(200, 0, 0);
+  // rect(xPos, yPos, width*0.008, height*0.01, 0, 0, 10, 0);
+  // rect(xPos, yPos*1.14, width*0.008, height*0.01, 0, 10, 0, 0);
+
 
   pop();
 
@@ -91,40 +131,48 @@ class Vehicle {
 
   display() {
 
-    fill(this.colour);
     switch(vehicleTypesAmount) {
-    case 1: // Car
+    case 1: // First vehicle = Car
       push();
       translate(-width*0.05, -height*0.04);
+      // Body
       fill(110);
       rect(this.xPos*1.01, this.yPos*0.98, width*0.020, height*0.095);
       rect(this.xPos*1.15, this.yPos*0.98, width*0.020, height*0.095);
       fill(this.colour); // RANDOM COLOUR
       rect(this.xPos, this.yPos, width*0.1, height*0.075);
     
-      if (this.direction === 1) {
+      if (this.direction === 1) { // Headlights and rear lights
         // Eastbound
 
+        // Rearlights
         fill(200, 0, 0);
         rect(this.xPos, this.yPos, width*0.008, height*0.020, 0, 0, 10, 0);
         rect(this.xPos, this.yPos*1.108, width*0.008, height*0.020, 0, 10, 0, 0);
-      
+        
+        // Headlights
         fill(200, 200, 0);
         rect(this.xPos*1.184, this.yPos, width*0.008, height*0.020, 0, 0, 0, 10);
         rect(this.xPos*1.184, this.yPos*1.108, width*0.008, height*0.020, 10, 0, 0, 0);
       } else {
         // Westbound
-    
+        
+        // Rearlights
         fill(200, 200, 0);
         rect(this.xPos, this.yPos, width*0.008, height*0.020, 0, 0, 10, 0);
         rect(this.xPos, this.yPos*1.108, width*0.008, height*0.020, 0, 10, 0, 0);
-    
+        
+        // Headlights
         fill(200, 0, 0);
         rect(this.xPos*1.184, this.yPos, width*0.008, height*0.020, 0, 0, 0, 10);
         rect(this.xPos*1.184, this.yPos*1.108, width*0.008, height*0.020, 10, 0, 0, 0);
       }
-    case 2:
+      pop();
+      break;
 
+    case 2: //second vehicle = Truck
+
+      break;
     }
   }
 
@@ -156,13 +204,13 @@ class Vehicle {
   action() {
     this.move();
 
-    if(random(99) === 99) {
+    if(int(random(100)) === 100) { // 1% chance of activating (0 - 99) with each int being a chance
       this.speedUp();
     }
-    if(random(99) === 99) {
+    if(int(random(100)) === 100) {
       this.speedDown();
     }
-    if(random(99) === 99) {
+    if(int(random(100)) === 100) {
       this.changeColor();
     }
 
