@@ -16,7 +16,7 @@ function setup() {
   angleMode(DEGREES);
   player = createCamera();
   player.setPosition(playerX, playerY, playerZ);
-  perspective(2 * atan(height / 2 / 500), width / height, 0.01 * 800, 10 * 800);
+  perspective(2 * atan(height / 2 / 500), width / height, 0.01 * 800, 10 * 100);
   linePerspective(false);
   
 }
@@ -35,92 +35,106 @@ function draw() {
 }
 
 function cameraControls() {
-  if (keyIsPressed) {
+  // if (keyIsPressed) {     VERY LAGGY - there are probly simpler ways to do this
 
-    if (keyIsDown(LEFT_ARROW) === true) {
-      player.pan(2);
-      turningDegree -= 2;
-    }
-    if (keyIsDown(RIGHT_ARROW) === true) {
-      player.pan(-2);
-      turningDegree += 2;
-    }
+  //   if (keyIsDown(LEFT_ARROW) === true) {
+  //     player.pan(2);
+  //     turningDegree -= 2;
+  //   }
+  //   if (keyIsDown(RIGHT_ARROW) === true) {
+  //     player.pan(-2);
+  //     turningDegree += 2;
+  //   }
 
-    if (turningDegree <= -1) {
-      turningDegree = 358;
-    } else if (turningDegree >= 361) {
-      turningDegree = 2;
-    }
+  //   if (turningDegree <= -1) {
+  //     turningDegree = 358;
+  //   } else if (turningDegree >= 361) {
+  //     turningDegree = 2;
+  //   }
 
-    if (keyIsDown(UP_ARROW) === true) {
-      player.tilt(-2);
-    }
-    if (keyIsDown(DOWN_ARROW) === true) {
-      player.tilt(2);
-    }
+  //   if (keyIsDown(UP_ARROW) === true) {
+  //     player.tilt(-2);
+  //   }
+  //   if (keyIsDown(DOWN_ARROW) === true) {
+  //     player.tilt(2);
+  //   }
 
-    if ((keyIsDown(87) && (keyIsDown(65) || keyIsDown(68))) || (keyIsDown(83) && (keyIsDown(68) || keyIsDown(65)))) {
+  //   if ((keyIsDown(87) && (keyIsDown(65) || keyIsDown(68))) || (keyIsDown(83) && (keyIsDown(68) || keyIsDown(65)))) {
 
-      if (keyIsDown(87) === true) { // W
+  //     if (keyIsDown(87) === true) { // W
 
-        playerX += sin(turningDegree) * speed/1.5;
+  //       playerX += sin(turningDegree) * speed/1.5;
   
-        playerZ -= cos(turningDegree) * speed/1.5;
-      }
-      if (keyIsDown(83) === true) { // S
+  //       playerZ -= cos(turningDegree) * speed/1.5;
+  //     }
+  //     if (keyIsDown(83) === true) { // S
   
-        playerX -= sin(turningDegree) * speed/1.5;
+  //       playerX -= sin(turningDegree) * speed/1.5;
   
-        playerZ += cos(turningDegree) * speed/1.5;
-      }
-      if (keyIsDown(65) === true) { // A
+  //       playerZ += cos(turningDegree) * speed/1.5;
+  //     }
+  //     if (keyIsDown(65) === true) { // A
 
-        playerX -= cos(turningDegree) * speed/1.5;
+  //       playerX -= cos(turningDegree) * speed/1.5;
   
-        playerZ -= sin(turningDegree) * speed/1.5;
+  //       playerZ -= sin(turningDegree) * speed/1.5;
         
-      }
-      if (keyIsDown(68) === true) { // D
+  //     }
+  //     if (keyIsDown(68) === true) { // D
   
-        playerX += cos(turningDegree) * speed/1.5;
+  //       playerX += cos(turningDegree) * speed/1.5;
   
-        playerZ += sin(turningDegree) * speed/1.5;
+  //       playerZ += sin(turningDegree) * speed/1.5;
   
-      }
+  //     }
 
-    } else {
+  //   } else {
 
-    if (keyIsDown(87) === true) { // W
+  //     if (keyIsDown(87) === true) { // W
 
-      playerX += sin(turningDegree) * speed;
+  //       createVector(cos(turningDegree), sin(turningDegree));
 
-      playerZ -= cos(turningDegree) * speed;
-    }
-    if (keyIsDown(83) === true) { // S
+  //       // playerX += sin(turningDegree) * speed;
 
-      playerX -= sin(turningDegree) * speed;
+  //       // playerZ -= cos(turningDegree) * speed;
+  //     }
+  //     if (keyIsDown(83) === true) { // S
 
-      playerZ += cos(turningDegree) * speed;
+  //       playerX -= sin(turningDegree) * speed;
 
-    }
-    if (keyIsDown(65) === true) { // A
+  //       playerZ += cos(turningDegree) * speed;
 
-      playerX -= cos(turningDegree) * speed;
+  //     }
+  //     if (keyIsDown(65) === true) { // A
 
-      playerZ -= sin(turningDegree) * speed;
+  //       playerX -= cos(turningDegree) * speed;
+
+  //       playerZ -= sin(turningDegree) * speed;
       
-    }
-    if (keyIsDown(68) === true) { // D
+  //     }
+  //     if (keyIsDown(68) === true) { // D
 
-      playerX += cos(turningDegree) * speed;
+  //       playerX += cos(turningDegree) * speed;
 
-      playerZ += sin(turningDegree) * speed;
+  //       playerZ += sin(turningDegree) * speed;
 
-    }
+  //     }
 
-    }
+  //   }
 
-    player.setPosition(playerX, playerY, playerZ);
+  //   player.setPosition(playerX, playerY, playerZ);
+
+  // }
+
+  if (keyPressed) {
 
   }
 }
+
+/*
+movement system
+
+
+
+
+*/

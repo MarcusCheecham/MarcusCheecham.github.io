@@ -23,7 +23,9 @@ function setup() {
 function draw() {
   background(25, 75, 10);
   drawRoad();
-  vehicleDisplayTest();
+  for (let i of eastbound) {
+    i.action();
+  }
 }
 
 
@@ -75,41 +77,41 @@ function vehicleDisplayTest() {
 
   // TRUCK
 
-  // Westbound
+  // // Westbound
 
-  // Body
-  fill("grey");
-  rect(xPos*1.075, yPos*1.0515, width*0.02, height*0.025);
-  fill(255, 255, 255);
-  rect(xPos*1.0925, yPos, width*0.09, height*0.080);
-  rect(xPos, yPos, width*0.04, height*0.080, 10, 0, 0, 10);
+  // // Body
+  // fill("grey");
+  // rect(xPos*1.075, yPos*1.0515, width*0.02, height*0.025);
+  // fill(255, 255, 255);
+  // rect(xPos*1.0925, yPos, width*0.09, height*0.080);
+  // rect(xPos, yPos, width*0.04, height*0.080, 10, 0, 0, 10);
 
-  // Backlights
-  fill(200, 0, 0);
-  rect(xPos*1.2525, yPos, width*0.01, height*0.010, 0, 0, 0, 10);
-  rect(xPos*1.2525, yPos*1.14, width*0.01, height*0.010, 10, 0, 0, 0);
+  // // Backlights
+  // fill(200, 0, 0);
+  // rect(xPos*1.2525, yPos, width*0.01, height*0.010, 0, 0, 0, 10);
+  // rect(xPos*1.2525, yPos*1.14, width*0.01, height*0.010, 10, 0, 0, 0);
 
-  // Headlights
-  fill(200, 200, 0);
-  rect(xPos, yPos, width*0.005, height*0.02, 0, 0, 10, 0);
-  rect(xPos, yPos*1.12, width*0.005, height*0.02, 0, 10, 0, 0);
+  // // Headlights
+  // fill(200, 200, 0);
+  // rect(xPos, yPos, width*0.005, height*0.02, 0, 0, 10, 0);
+  // rect(xPos, yPos*1.12, width*0.005, height*0.02, 0, 10, 0, 0);
 
 
-  // Eastbound
+  // // Eastbound
 
-  // Body
+  // // Body
   // fill("grey");
   // rect(xPos*1.180, yPos*1.0515, width*0.02, height*0.025);
   // fill(255, 255, 255);
   // rect(xPos, yPos, width*0.09, height*0.080);
   // rect(xPos*1.190, yPos, width*0.04, height*0.080, 0, 10, 10, 0);
 
-  // Headlights
+  // // Headlights
   // fill(200, 200, 0);
   // rect(xPos*1.26, yPos, width*0.005, height*0.02, 0, 10, 0, 0);
   // rect(xPos*1.26, yPos*1.12, width*0.005, height*0.02, 0, 0, 10, 0);
 
-  // Backlights
+  // // Backlights
   // fill(200, 0, 0);
   // rect(xPos, yPos, width*0.008, height*0.01, 0, 0, 10, 0);
   // rect(xPos, yPos*1.14, width*0.008, height*0.01, 0, 10, 0, 0);
@@ -172,6 +174,54 @@ class Vehicle {
 
     case 2: //second vehicle = Truck
 
+      push();
+      translate(-width*0.05, -height*0.04);
+
+      if (this.direction === 1) {
+
+        // Eastbound
+
+        // Body
+        fill("grey");
+        rect(this.xPos*1.180, this.yPos*1.0515, width*0.02, height*0.025);
+        fill(this.colour);
+        rect(this.xPos, this.yPos, width*0.09, height*0.080);
+        rect(this.xPos*1.190, this.yPos, width*0.04, height*0.080, 0, 10, 10, 0);
+
+        // Headlights
+        fill(200, 200, 0);
+        rect(this.xPos*1.26, this.yPos, width*0.005, height*0.02, 0, 10, 0, 0);
+        rect(this.xPos*1.26, this.yPos*1.12, width*0.005, height*0.02, 0, 0, 10, 0);
+
+        // Backlights
+        fill(200, 0, 0);
+        rect(this.xPos, this.yPos, width*0.008, height*0.01, 0, 0, 10, 0);
+        rect(this.xPos, this.yPos*1.14, width*0.008, height*0.01, 0, 10, 0, 0);
+
+      } else {
+
+        // Westbound
+
+        // Body
+        fill("grey");
+        rect(this.xPos*1.075, this.yPos*1.0515, width*0.02, height*0.025);
+        fill(this.colour);
+        rect(this.xPos*1.0925, this.yPos, width*0.09, height*0.080);
+        rect(this.xPos, this.yPos, width*0.04, height*0.080, 10, 0, 0, 10);
+
+        // Backlights
+        fill(200, 0, 0);
+        rect(this.xPos*1.2525, this.yPos, width*0.01, height*0.010, 0, 0, 0, 10);
+        rect(this.xPos*1.2525, this.yPos*1.14, width*0.01, height*0.010, 10, 0, 0, 0);
+
+        // Headlights
+        fill(200, 200, 0);
+        rect(this.xPos, this.yPos, width*0.005, height*0.02, 0, 0, 10, 0);
+        rect(this.xPos, this.yPos*1.12, width*0.005, height*0.02, 0, 10, 0, 0);
+
+      }
+
+      pop();
       break;
     }
   }
@@ -179,8 +229,14 @@ class Vehicle {
   move() {
     if (this.direc > 0) {
       this.xPos += this.speed;
+      if (this.xPos > width) {
+        this.xPos = 0;
+      }
     } else {
       this.xPos -= this.speed;
+      if (this.xPos < 0) {
+        this.xPos = width;
+      }
     }
   }
 
