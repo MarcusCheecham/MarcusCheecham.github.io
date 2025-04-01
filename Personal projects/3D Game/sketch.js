@@ -18,7 +18,11 @@ function setup() {
   player.setPosition(playerX, playerY, playerZ);
   perspective(2 * atan(height / 2 / 500), width / height, 0.01 * 800, 10 * 100);
   linePerspective(false);
-  
+
+  camList.push(new Cam(0, -100, -100, 0, 0, 0));
+  camList.push(new Cam(-100, -100, 0, 0, 0));
+  camList.push(new Cam(0, -100, 100, 0, 0, 0));
+  camList.push(new Cam(100, -100, 0, 0, 0));
 }
 
 function draw() {
@@ -26,12 +30,58 @@ function draw() {
 
   background(220);
 
-  cameraControls();
+  for (let i of camList) {
+    i.display();
+  }
 
-  translate(0, -100, -100);
+  gui();
+
+  cameraControls();
+  push();
+  translate(0, -50, -100);
   fill(0, 255, 0);
-  sphere(10, 10, 10);
+  sphere(2, 4, 4);
+  pop();
+
+  // push();
+  // translate(0, -100, -50);
+  // fill(200);
+  // plane(100, 100);
+  // pop();
   
+}
+
+class Cam {
+  constructor(x, y, z, type, controlled) {
+    this.x = x; this.y = y; this.z = z;
+    // this.lookX = lookX; this.lookY = lookY; this.lookZ = lookZ;
+    this.type = type;
+    this.controlled = controlled;
+  }
+
+  ping() {
+
+  }
+
+  ability() {
+
+  }
+
+  display() {
+    push();
+    translate(this.x, this.y, this.z);
+    fill(random(255), 0, random(255));
+    sphere(2, 4, 4);
+    pop();
+  }
+
+  active() {
+    this.display();
+  }
+}
+
+function gui() {
+
 }
 
 function cameraControls() {
@@ -94,9 +144,9 @@ function cameraControls() {
 
   //       createVector(cos(turningDegree), sin(turningDegree));
 
-  //       // playerX += sin(turningDegree) * speed;
+  //       playerX += sin(turningDegree) * speed;
 
-  //       // playerZ -= cos(turningDegree) * speed;
+  //       playerZ -= cos(turningDegree) * speed;
   //     }
   //     if (keyIsDown(83) === true) { // S
 
@@ -126,15 +176,27 @@ function cameraControls() {
 
   // }
 
-  if (keyPressed) {
+  if (keyIsPressed) {
 
+    if (keyIsDown(LEFT_ARROW) === true) {
+      player.pan(2);
+    }
+    if (keyIsDown(RIGHT_ARROW) === true) {
+      player.pan(-2);
+    }
+    if (keyIsDown(UP_ARROW) === true) {
+      player.tilt(-2);
+    }
+    if (keyIsDown(DOWN_ARROW) === true) {
+      player.tilt(2);
+    }
+
+    if (keyIsDown(32) === true) {
+      for (let i of camList) {
+        if ((player.centerX < i.x + 100 && player.centerX > i.x - 100) && (player.centerY > i.y - 100 && player.centerY < i.y + 100) && player.centerZ < i.z) {
+          player.setPosition(i.x, i.y, i.z);
+        }
+      }
+    }
   }
 }
-
-/*
-movement system
-
-
-
-
-*/
