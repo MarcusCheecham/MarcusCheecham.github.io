@@ -23,9 +23,10 @@ function setup() {
 function draw() {
   background(25, 75, 10);
   drawRoad();
-  for (let i of eastbound) {
-    i.action();
-  }
+  vehicleDisplayTest();
+  // for (let i of eastbound) {
+  //   i.action();
+  // }
 }
 
 
@@ -55,24 +56,25 @@ function vehicleDisplayTest() {
 
   // CAR
 
-  // fill(110);
-  // rect(x*1.01, y*0.98, width*0.020, height*0.095);
-  // rect(x*1.15, y*0.98, width*0.020, height*0.095);
-  // fill(random(255), random(255), random(255)); // RANDOM COLOUR
-  // rect(x, y, width*0.1, height*0.075);
+  fill(110);
+  rect(xPos*1.01, yPos*0.98, width*0.020, height*0.095);
+  rect(xPos*1.15, yPos*0.98, width*0.020, height*0.095);
+  fill(random(255), random(255), random(255)); // RANDOM COLOUR
+  rect(xPos, yPos, width*0.1, height*0.075);
 
-  // // Westbound
+  // Westbound
+
+  fill(200, 200, 0);
+  rect(xPos, yPos, width*0.008, height*0.020, 0, 0, 10, 0);
+  rect(xPos, yPos*1.108, width*0.008, height*0.020, 0, 10, 0, 0);
+  pop();
+
+
+  // Eastbound
 
   // fill(200, 200, 0);
-  // rect(x, y, width*0.008, height*0.020, 0, 0, 10, 0);
-  // rect(x, y*1.108, width*0.008, height*0.020, 0, 10, 0, 0);
-
-
-  // // Eastbound
-
-  // fill(200, 200, 0);
-  // rect(x*1.184, y, width*0.008, height*0.020, 0, 0, 0, 10);
-  // rect(x*1.184, y*1.108, width*0.008, height*0.020, 10, 0, 0, 0);
+  // rect(x*1.184, yPos, width*0.008, height*0.020, 0, 0, 0, 10);
+  // rect(x*1.184, yPos*1.108, width*0.008, height*0.020, 10, 0, 0, 0);
 
 
   // TRUCK
