@@ -14,8 +14,7 @@ let speed = 5;
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
   angleMode(DEGREES);
-  player = createCamera();
-  player.setPosition(playerX, playerY, playerZ);
+
   perspective(2 * atan(height / 2 / 500), width / height, 0.01 * 800, 10 * 100);
   linePerspective(false);
 
@@ -27,6 +26,7 @@ function setup() {
 
 function draw() {
   debugMode();
+  orbitControl(1, 1, 1);
 
   background(220);
 
@@ -37,11 +37,15 @@ function draw() {
   gui();
 
   cameraControls();
-  push();
-  translate(0, -50, -100);
-  fill(0, 255, 0);
-  sphere(2, 4, 4);
-  pop();
+
+  // push();
+  // line(player.x, player.y, player.z, player.centerX, player.centerY, player.centerZ);
+  // pop();
+  // push();
+  // translate(0, -50, -100);
+  // fill(0, 255, 0);
+  // sphere(2, 4, 4);
+  // pop();
 
   // push();
   // translate(0, -100, -50);
