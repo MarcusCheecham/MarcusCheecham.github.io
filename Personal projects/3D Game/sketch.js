@@ -5,7 +5,7 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let player;
+let player = {x: 0, y: -100 z: 0};
 let playerX = 0;  let playerY = -100; let playerZ = 0;
 let camList = [];
 let turningDegree = 0;
@@ -14,7 +14,8 @@ let speed = 5;
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
   angleMode(DEGREES);
-
+  player = createCamera();
+  player.setPosition(playerX, playerY, playerZ);
   perspective(2 * atan(height / 2 / 500), width / height, 0.01 * 800, 10 * 100);
   linePerspective(false);
 
@@ -26,7 +27,6 @@ function setup() {
 
 function draw() {
   debugMode();
-  orbitControl(1, 1, 1);
 
   background(220);
 
@@ -180,27 +180,31 @@ function cameraControls() {
 
   // }
 
-  if (keyIsPressed) {
 
-    if (keyIsDown(LEFT_ARROW) === true) {
-      player.pan(2);
-    }
-    if (keyIsDown(RIGHT_ARROW) === true) {
-      player.pan(-2);
-    }
-    if (keyIsDown(UP_ARROW) === true) {
-      player.tilt(-2);
-    }
-    if (keyIsDown(DOWN_ARROW) === true) {
-      player.tilt(2);
-    }
 
-    if (keyIsDown(32) === true) {
-      for (let i of camList) {
-        if ((player.centerX < i.x + 100 && player.centerX > i.x - 100) && (player.centerY > i.y - 100 && player.centerY < i.y + 100) && player.centerZ < i.z) {
-          player.setPosition(i.x, i.y, i.z);
-        }
-      }
-    }
-  }
+
+
+  // if (keyIsPressed) {
+
+  //   if (keyIsDown(LEFT_ARROW) === true) {
+  //     player.pan(2);
+  //   }
+  //   if (keyIsDown(RIGHT_ARROW) === true) {
+  //     player.pan(-2);
+  //   }
+  //   if (keyIsDown(UP_ARROW) === true) {
+  //     player.tilt(-2);
+  //   }
+  //   if (keyIsDown(DOWN_ARROW) === true) {
+  //     player.tilt(2);
+  //   }
+
+  //   if (keyIsDown(32) === true) {
+  //     for (let i of camList) {
+  //       if ((player.centerX < i.x + 100 && player.centerX > i.x - 100) && (player.centerY > i.y - 100 && player.centerY < i.y + 100) && player.centerZ < i.z) {
+  //         player.setPosition(i.x, i.y, i.z);
+  //       }
+  //     }
+  //   }
+  // }
 }
