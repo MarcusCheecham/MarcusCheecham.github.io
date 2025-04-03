@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 /* eslint-disable indent */
 
 // 2D Array Basics DEMO
@@ -13,9 +14,9 @@ const NUM_ROWS = 3; const NUM_COLS = 5;
 function setup() {
   createCanvas(NUM_COLS * squareSize, NUM_ROWS * squareSize);
 
-  grid = [[random(255), random(255), random(255), random(255), random(255)],
-          [random(255), random(255), random(255), random(255), random(255)],
-          [random(255), random(255), random(255), random(255), random(255)]];
+  grid = [[0, 255, 255, 0, 255],
+          [0, 255, 255, 0, 255],
+          [255, 0, 0, 255, 0]];
   
 }
 
@@ -43,9 +44,29 @@ function getCurrentX() {
 }
 
 function mousePressed() {
+  // flip current tile to a random greyscale value
+  // only fo something if mouseX/mouseY are on the canvas
+
   let x = getCurrentX();
   let y = getCurrentY();
-  grid[y][x] = floor(random(255));
+
+  // always: flip the "Current" tile
+  flip(x, y);
+
+  // sometimes: (depending on position) flip the neighbours
+
+  if (y > 0) {flip(x, y-1);}
+  if (y < NUM_ROWS - 1) {flip(x, y+1);}
+  if (x > 0) {flip(x-1, y);}
+  if (x < NUM_COLS - 1) {flip(x+1, y);}
+  
+}
+
+function flip(x, y) {
+  // take a tile and invert its value
+
+  if (grid[y][x] === 0) {grid[y][x] = 255;}
+  else {grid[y][x] = 0;}
 }
 
 function draw() {
