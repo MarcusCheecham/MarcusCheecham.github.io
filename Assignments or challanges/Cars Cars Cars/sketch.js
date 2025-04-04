@@ -1,9 +1,6 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// Cars cars cars
+// Marcus Cheecham
+// April 4th, 2025
 
 let eastbound = [];
 let westbound = [];
@@ -23,6 +20,7 @@ function setup() {
 function draw() {
   background(25, 75, 10);
   drawRoad();
+  traficLights();
   // vehicleDisplayTest();
   for (let car of eastbound) {
     car.action();
@@ -34,10 +32,31 @@ function draw() {
 }
 
 function mousePressed() {
-  if (mouseButton === LEFT && !keyIsDown(SHIFT)) {
+  if (mouseButton === LEFT && !keyIsDown(SHIFT)) { // If left click, add eastbound
     eastbound.push(new Vehicle(round(random(0, vehicleTypesAmount)), 0, random(height*0.55, height*0.715), [round(random(255)), round(random(255)), round(random(255))], 1, random(15)));
-  } else if (mouseButton === LEFT && keyIsDown(SHIFT)) {
+  } else if (mouseButton === LEFT && keyIsDown(SHIFT)) { // if left and shit click, add westbound
     westbound.push(new Vehicle(round(random(0, vehicleTypesAmount)), width, random(height*0.30, height*0.45), [round(random(255)), round(random(255)), round(random(255))], -1, random(15)));
+  }
+}
+
+function traficLights() {
+  if (keyIsPressed && keyCode === 32) { // Slows all vehicals to a stop
+    frameCount = 0;
+    for (let car of eastbound) {
+      car.direc = 0
+    } 
+    for (let car of westbound) {
+      car.direc = 0;
+    }
+  }
+
+  if (frameCount >= 120) { // Returns their speed
+    for (let car of eastbound) {
+      car.direc = 1;
+    }
+    for (let car of westbound) {
+      car.direc = -1
+    }
   }
 }
 
@@ -59,82 +78,6 @@ function drawRoad() {
   stroke(0); 
   strokeWeight(1);
   rectMode(CORNER);
-}
-
-function vehicleDisplayTest() {
-  let xPos = width/2;
-  let yPos = height/2;
-
-  push();
-  translate(-width*0.05, -height*0.04);
-
-  // CAR
-
-  // fill(110);
-  // rect(xPos + width*0.01, yPos - height*0.01, width*0.020, height*0.095);
-  // rect(xPos + width*0.07, yPos - height*0.01, width*0.020, height*0.095);
-  // fill(random(255), random(255), random(255)); // RANDOM COLOUR
-  // rect(xPos, yPos, width*0.1, height*0.075);
-
-  // Westbound
-
-  // fill(200, 200, 0);
-  // rect(xPos, yPos, width*0.008, height*0.020, 0, 0, 10, 0);
-  // rect(xPos, yPos + height*0.055, width*0.008, height*0.020, 0, 10, 0, 0);
-  
-
-
-  // Eastbound
-
-  // fill(200, 200, 0);
-  // rect(xPos + width*0.0924, yPos, width*0.008, height*0.020, 0, 0, 0, 10);
-  // rect(xPos + width*0.0924, yPos + height*0.055, width*0.008, height*0.020, 10, 0, 0, 0);
-  
-
-  // TRUCK
-
-  // Westbound
-
-  // Body
-  // fill("grey");
-  // rect(xPos + width*0.030, yPos + height*0.025, width*0.02, height*0.025);
-  // fill(255, 255, 255); // RANDOM COLOUR
-  // rect(xPos + width*0.04575, yPos, width*0.09, height*0.080);
-  // rect(xPos, yPos, width*0.04, height*0.080, 0, 10, 10, 0);
-
-  // // Backlights
-  // fill(200, 0, 0);
-  // rect(xPos + width*0.126, yPos, width*0.01, height*0.010, 0, 0, 0, 10);
-  // rect(xPos + width*0.126, yPos + height*0.07, width*0.01, height*0.010, 10, 0, 0, 0);
-
-  // // Headlights
-  // fill(200, 200, 0);
-  // rect(xPos, yPos, width*0.005, height*0.02, 0, 0, 10, 0);
-  // rect(xPos, yPos + height*0.06, width*0.005, height*0.02, 0, 10, 0, 0);
-
-
-  // Eastbound
-
-  // Body
-  fill("grey");
-  rect(xPos + width*0.075, yPos + height*0.025, width*0.02, height*0.025);
-  fill(255, 255, 255); // RANDOM COLOUR
-  rect(xPos, yPos, width*0.09, height*0.080);
-  rect(xPos + width*0.095, yPos, width*0.04, height*0.080, 0, 10, 10, 0);
-
-  // Headlights
-  fill(200, 200, 0);
-  rect(xPos + width*0.13, yPos, width*0.005, height*0.02, 0, 10, 0, 0);
-  rect(xPos + width*0.13, yPos + height*0.06, width*0.005, height*0.02, 0, 0, 10, 0);
-
-  // Backlights
-  fill(200, 0, 0);
-  rect(xPos, yPos, width*0.008, height*0.01, 0, 0, 10, 0);
-  rect(xPos, yPos + height*0.07, width*0.008, height*0.01, 0, 10, 0, 0);
-
-
-  pop();
-
 }
 
 class Vehicle {
@@ -222,7 +165,7 @@ class Vehicle {
         rect(this.xPos + width*0.030, this.yPos + height*0.025, width*0.02, height*0.025);
         fill(this.colour); // RANDOM COLOUR
         rect(this.xPos + width*0.04575, this.yPos, width*0.09, height*0.080);
-        rect(this.xPos, this.yPos, width*0.04, height*0.080, 0, 10, 10, 0);
+        rect(this.xPos, this.yPos, width*0.04, height*0.080, 10, 0, 0, 10);
       
         // Backlights
         fill(200, 0, 0);
@@ -231,8 +174,8 @@ class Vehicle {
       
         // Headlights
         fill(200, 200, 0);
-        rect(this.xPos, this.yPos, width*0.005, height*0.02, 0, 0, 10, 0);
-        rect(this.xPos, this.yPos + height*0.06, width*0.005, height*0.02, 0, 10, 0, 0);
+        rect(this.xPos, this.yPos, width*0.005, height*0.02, 10, 0, 0, 0);
+        rect(this.xPos, this.yPos + height*0.06, width*0.005, height*0.02, 0, 0, 0, 10);
 
       }
 
@@ -247,7 +190,7 @@ class Vehicle {
       if (this.xPos > width) {
         this.xPos = 0;
       }
-    } else { // Moving West
+    } else if (this.direc < 0) { // Moving West
       this.xPos -= this.speed;
       if (this.xPos < 0) {
         this.xPos = width;
@@ -287,4 +230,80 @@ class Vehicle {
 
     this.display();
   }
+}
+
+function vehicleDisplayTest() { // FOR TESTING MODELS
+  let xPos = width/2;
+  let yPos = height/2;
+
+  // push();
+  // translate(-width*0.05, -height*0.04);
+
+  // CAR
+
+  // fill(110);
+  // rect(xPos + width*0.01, yPos - height*0.01, width*0.020, height*0.095);
+  // rect(xPos + width*0.07, yPos - height*0.01, width*0.020, height*0.095);
+  // fill(random(255), random(255), random(255)); // RANDOM COLOUR
+  // rect(xPos, yPos, width*0.1, height*0.075);
+
+  // Westbound
+
+  // fill(200, 200, 0);
+  // rect(xPos, yPos, width*0.008, height*0.020, 0, 0, 10, 0);
+  // rect(xPos, yPos + height*0.055, width*0.008, height*0.020, 0, 10, 0, 0);
+  
+
+
+  // Eastbound
+
+  // fill(200, 200, 0);
+  // rect(xPos + width*0.0924, yPos, width*0.008, height*0.020, 0, 0, 0, 10);
+  // rect(xPos + width*0.0924, yPos + height*0.055, width*0.008, height*0.020, 10, 0, 0, 0);
+  
+
+  // TRUCK
+
+  // Westbound
+
+  // Body
+  // fill("grey");
+  // rect(xPos + width*0.030, yPos + height*0.025, width*0.02, height*0.025);
+  // fill(255, 255, 255); // RANDOM COLOUR
+  // rect(xPos + width*0.04575, yPos, width*0.09, height*0.080);
+  // rect(xPos, yPos, width*0.04, height*0.080, 0, 10, 10, 0);
+
+  // // Backlights
+  // fill(200, 0, 0);
+  // rect(xPos + width*0.126, yPos, width*0.01, height*0.010, 0, 0, 0, 10);
+  // rect(xPos + width*0.126, yPos + height*0.07, width*0.01, height*0.010, 10, 0, 0, 0);
+
+  // // Headlights
+  // fill(200, 200, 0);
+  // rect(xPos, yPos, width*0.005, height*0.02, 0, 0, 10, 0);
+  // rect(xPos, yPos + height*0.06, width*0.005, height*0.02, 0, 10, 0, 0);
+
+
+  // // Eastbound
+
+  // // Body
+  // fill("grey");
+  // rect(xPos + width*0.075, yPos + height*0.025, width*0.02, height*0.025);
+  // fill(255, 255, 255); // RANDOM COLOUR
+  // rect(xPos, yPos, width*0.09, height*0.080);
+  // rect(xPos + width*0.095, yPos, width*0.04, height*0.080, 0, 10, 10, 0);
+
+  // // Headlights
+  // fill(200, 200, 0);
+  // rect(xPos + width*0.13, yPos, width*0.005, height*0.02, 0, 10, 0, 0);
+  // rect(xPos + width*0.13, yPos + height*0.06, width*0.005, height*0.02, 0, 0, 10, 0);
+
+  // // Backlights
+  // fill(200, 0, 0);
+  // rect(xPos, yPos, width*0.008, height*0.01, 0, 0, 10, 0);
+  // rect(xPos, yPos + height*0.07, width*0.008, height*0.01, 0, 10, 0, 0);
+
+
+  // pop();
+
 }
