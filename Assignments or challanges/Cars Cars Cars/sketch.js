@@ -221,11 +221,11 @@ class Vehicle {
     if(int(random(100)) === 100) { // 1% chance of activating (0 - 99) with each int being a chance
       this.speedUp();
     }
-    if(int(random(100)) === 100) {
+    if(int(random(100)) === 100) { // 100 CANNOT BE HIT SINCE RANDOM(100); DOES NOT HIT 100 BUT INSTEAD HITS 99. CHANGE TO 0 OR 99
       this.speedDown();
     }
     if(int(random(100)) === 100) {
-      this.changeColor();
+      this.changeColor(); // WRONG NAME, ITS: "changeColour" NOT "changeColor"
     }
 
     this.display();
