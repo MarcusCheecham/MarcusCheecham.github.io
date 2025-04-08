@@ -55,11 +55,16 @@ function mousePressed() {
 
   // sometimes: (depending on position) flip the neighbours
 
-  if (y > 0) {flip(x, y-1);}
-  if (y < NUM_ROWS - 1) {flip(x, y+1);}
-  if (x > 0) {flip(x-1, y);}
-  if (x < NUM_COLS - 1) {flip(x+1, y);}
-  
+  if (!keyIsDown(16)) {
+    if (y > 0) {flip(x, y-1);}
+    if (y < NUM_ROWS - 1) {flip(x, y+1);}
+    if (x > 0) {flip(x-1, y);}
+    if (x < NUM_COLS - 1) {flip(x+1, y);}
+  }
+}
+
+function winCondition(value) {
+  return (value % 255) === 0;
 }
 
 function flip(x, y) {
@@ -72,4 +77,10 @@ function flip(x, y) {
 function draw() {
   // interpet the information in the 2D array, and draw a grid of colors on the screen to reflect it.
   renderGrid();
+  
+  for (let y of grid) {
+    for (let x of grid) {
+      console.log(y.x.every(winCondition));
+    }
+  }
 }
