@@ -5,11 +5,12 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let player = {x: 0, y: -100 z: 0};
+let player;
 let playerX = 0;  let playerY = -100; let playerZ = 0;
 let camList = [];
 let turningDegree = 0;
 let speed = 5;
+const DEFAULT = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
@@ -19,10 +20,10 @@ function setup() {
   perspective(2 * atan(height / 2 / 500), width / height, 0.01 * 800, 10 * 100);
   linePerspective(false);
 
-  camList.push(new Cam(0, -100, -100, 0, 0, 0));
-  camList.push(new Cam(-100, -100, 0, 0, 0));
-  camList.push(new Cam(0, -100, 100, 0, 0, 0));
-  camList.push(new Cam(100, -100, 0, 0, 0));
+  camList.push(new Cam(0, -100, -100, DEFAULT, false));
+  camList.push(new Cam(-100, -100, 0, DEFAULT, false));
+  camList.push(new Cam(0, -100, 100, DEFAULT, false));
+  camList.push(new Cam(100, -100, 0, DEFAULT, false));
 }
 
 function draw() {
@@ -31,7 +32,7 @@ function draw() {
   background(220);
 
   for (let i of camList) {
-    i.display();
+    i.active();
   }
 
   gui();
@@ -39,7 +40,7 @@ function draw() {
   cameraControls();
 
   // push();
-  // line(player.x, player.y, player.z, player.centerX, player.centerY, player.centerZ);
+  // line(playerX, playerY, playerZ, player.centerX, player.centerY, player.centerZ);
   // pop();
   // push();
   // translate(0, -50, -100);
@@ -80,8 +81,16 @@ class Cam {
   }
 
   active() {
+    if (this.controlled === true) {
+      playerX = this.x;
+      playerY = this.y;
+      playerZ = this.z;
+      player.setPosition(this.x, this.y, this.z);
+      this.controlled = false;
+    }
     this.display();
   }
+
 }
 
 function gui() {
@@ -89,7 +98,7 @@ function gui() {
 }
 
 function cameraControls() {
-  // if (keyIsPressed) {     VERY LAGGY - there are probly simpler ways to do this
+  // if (keyIsPressed) {    // VERY LAGGY - there are probly simpler ways to do this
 
   //   if (keyIsDown(LEFT_ARROW) === true) {
   //     player.pan(2);
@@ -112,6 +121,7 @@ function cameraControls() {
   //   if (keyIsDown(DOWN_ARROW) === true) {
   //     player.tilt(2);
   //   }
+  // }
 
   //   if ((keyIsDown(87) && (keyIsDown(65) || keyIsDown(68))) || (keyIsDown(83) && (keyIsDown(68) || keyIsDown(65)))) {
 
@@ -184,27 +194,27 @@ function cameraControls() {
 
 
 
-  // if (keyIsPressed) {
+  if (keyIsPressed) {
 
-  //   if (keyIsDown(LEFT_ARROW) === true) {
-  //     player.pan(2);
-  //   }
-  //   if (keyIsDown(RIGHT_ARROW) === true) {
-  //     player.pan(-2);
-  //   }
-  //   if (keyIsDown(UP_ARROW) === true) {
-  //     player.tilt(-2);
-  //   }
-  //   if (keyIsDown(DOWN_ARROW) === true) {
-  //     player.tilt(2);
-  //   }
+    if (keyIsDown(LEFT_ARROW) === true) {
+      player.pan(2);
+    }
+    if (keyIsDown(RIGHT_ARROW) === true) {
+      player.pan(-2);
+    }
+    if (keyIsDown(UP_ARROW) === true) {
+      player.tilt(-2);
+    }
+    if (keyIsDown(DOWN_ARROW) === true) {
+      player.tilt(2);
+    }
 
-  //   if (keyIsDown(32) === true) {
-  //     for (let i of camList) {
-  //       if ((player.centerX < i.x + 100 && player.centerX > i.x - 100) && (player.centerY > i.y - 100 && player.centerY < i.y + 100) && player.centerZ < i.z) {
-  //         player.setPosition(i.x, i.y, i.z);
-  //       }
-  //     }
-  //   }
-  // }
+    if (keyIsDown(32) === true) {
+      for (let i of camList) {
+        if ((player.centerX < i.x + 100 && player.centerX > i.x - 100) && (player.centerY > i.y - 100 && player.centerY < i.y + 100) && player.centerZ < i.z) {
+          i.controlled = true;
+        }
+      }
+    }
+  }
 }
