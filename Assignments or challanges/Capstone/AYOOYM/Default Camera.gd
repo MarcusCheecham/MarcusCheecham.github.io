@@ -8,4 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if (KEY_SPACE == 1):
+		Camera3D.position.x = 50
+	
 	pass
