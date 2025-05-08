@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bc5ii4m0vb6fn"]
+[gd_scene load_steps=10 format=3 uid="uid://bc5ii4m0vb6fn"]
 
+[ext_resource type="Script" path="res://BasicControls.gd" id="1_d567c"]
 [ext_resource type="PackedScene" uid="uid://dowv00265tuq6" path="res://default_cam.tscn" id="1_ik6pk"]
 [ext_resource type="PackedScene" uid="uid://bdqoiptdbik4a" path="res://ui.tscn" id="1_wxxfk"]
 [ext_resource type="PackedScene" uid="uid://bkert3015ba7i" path="res://physics_cam.tscn" id="2_ktvms"]
@@ -21,6 +22,7 @@ glow_enabled = true
 [sub_resource type="PlaneMesh" id="PlaneMesh_yhb6f"]
 
 [node name="Level" type="Node3D"]
+script = ExtResource("1_d567c")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mya0b")
@@ -41,8 +43,14 @@ transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 
 [node name="DefaultCAM" parent="." instance=ExtResource("1_ik6pk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 
+[node name="Camera3D2" type="Camera3D" parent="DefaultCAM"]
+
 [node name="PhysicsCAM" parent="." instance=ExtResource("2_ktvms")]
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -5, 1, -5)
 
+[node name="Camera3D2" type="Camera3D" parent="PhysicsCAM"]
+
 [node name="CheckpointCAM" parent="." instance=ExtResource("3_742ln")]
 transform = Transform3D(-0.819152, 0, 0.573576, 0, 1, 0, -0.573576, 0, -0.819152, 5, 1, -5)
+
+[node name="Camera3D2" type="Camera3D" parent="CheckpointCAM"]

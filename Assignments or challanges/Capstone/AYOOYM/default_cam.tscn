@@ -37,6 +37,3 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 lod_bias = 0.001
 mesh = SubResource("SphereMesh_ld45n")
 skeleton = NodePath("../Dome")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-fov = 50.0
