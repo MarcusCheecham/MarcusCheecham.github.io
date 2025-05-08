@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://bkert3015ba7i"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_f85tf"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xgldc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3osj0"]
+albedo_color = Color(0.807391, 0.0060542, 4.81307e-07, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_h0tss"]
+material = SubResource("StandardMaterial3D_3osj0")
+height = 0.5
+is_hemisphere = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtfw7"]
+albedo_color = Color(0.474964, 0.0216851, 0.138242, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qdl1n"]
+material = SubResource("StandardMaterial3D_xtfw7")
+height = 0.5
+is_hemisphere = true
+
+[node name="PhysicsCAM" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("ArrayMesh_f85tf")
+
+[node name="Base" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.05, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("CylinderMesh_xgldc")
+
+[node name="Dome" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transparency = 0.5
+lod_bias = 0.001
+mesh = SubResource("SphereMesh_h0tss")
+
+[node name="Dome2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+lod_bias = 0.001
+mesh = SubResource("SphereMesh_qdl1n")
+skeleton = NodePath("../Dome")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+fov = 50.0

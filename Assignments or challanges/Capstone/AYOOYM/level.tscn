@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://bc5ii4m0vb6fn"]
+
+[ext_resource type="PackedScene" uid="uid://dowv00265tuq6" path="res://default_cam.tscn" id="1_ik6pk"]
+[ext_resource type="PackedScene" uid="uid://bdqoiptdbik4a" path="res://ui.tscn" id="1_wxxfk"]
+[ext_resource type="PackedScene" uid="uid://bkert3015ba7i" path="res://physics_cam.tscn" id="2_ktvms"]
+[ext_resource type="PackedScene" uid="uid://b85owfmxrphb0" path="res://checkpoint_cam.tscn" id="3_742ln"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oybpj"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_e66tg"]
+sky_material = SubResource("ProceduralSkyMaterial_oybpj")
+
+[sub_resource type="Environment" id="Environment_mya0b"]
+background_mode = 2
+sky = SubResource("Sky_e66tg")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yhb6f"]
+
+[node name="Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mya0b")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_yhb6f")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0.1, 0)
+
+[node name="UI" parent="Camera3D" instance=ExtResource("1_wxxfk")]
+
+[node name="DefaultCAM" parent="." instance=ExtResource("1_ik6pk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
+
+[node name="PhysicsCAM" parent="." instance=ExtResource("2_ktvms")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -5, 1, -5)
+
+[node name="CheckpointCAM" parent="." instance=ExtResource("3_742ln")]
+transform = Transform3D(-0.819152, 0, 0.573576, 0, 1, 0, -0.573576, 0, -0.819152, 5, 1, -5)
