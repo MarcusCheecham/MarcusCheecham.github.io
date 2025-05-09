@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b85owfmxrphb0"]
+[gd_scene load_steps=5 format=3 uid="uid://cs7kq20dlemre"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jytux"]
 
@@ -39,3 +39,9 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 lod_bias = 0.001
 mesh = SubResource("SphereMesh_ld45n")
 skeleton = NodePath("../Dome")
+
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="MeshInstance3D/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -2.18557e-06, -1, 0, 50, -4.37114e-08, 0, 0, 0)

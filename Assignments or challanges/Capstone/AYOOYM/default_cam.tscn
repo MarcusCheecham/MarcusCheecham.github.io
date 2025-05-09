@@ -1,4 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dowv00265tuq6"]
+[gd_scene load_steps=7 format=3 uid="uid://fmosmk7xgtoj"]
+
+[ext_resource type="Script" path="res://Scripts/RayCast3D.gd" id="1_easup"]
+[ext_resource type="Script" path="res://Scripts/HeadMovements.gd" id="1_qpqen"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_f85tf"]
 
@@ -37,3 +40,13 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 lod_bias = 0.001
 mesh = SubResource("SphereMesh_ld45n")
 skeleton = NodePath("../Dome")
+
+[node name="View" type="Node3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_qpqen")
+
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D/View"]
+
+[node name="RayCast3D" type="RayCast3D" parent="MeshInstance3D/View/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -2.18557e-06, -1, 0, 50, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_easup")
