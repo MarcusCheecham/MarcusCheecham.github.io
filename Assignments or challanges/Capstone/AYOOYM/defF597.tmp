@@ -6,9 +6,6 @@
 [sub_resource type="ArrayMesh" id="ArrayMesh_f85tf"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_xgldc"]
-radial_segments = 30
-rings = 1
-cap_bottom = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6r67t"]
 albedo_color = Color(0, 0, 0, 1)
@@ -20,8 +17,6 @@ clearcoat_roughness = 0.25
 [sub_resource type="SphereMesh" id="SphereMesh_ld45n"]
 material = SubResource("StandardMaterial3D_6r67t")
 height = 0.5
-radial_segments = 35
-rings = 16
 is_hemisphere = true
 
 [node name="DefaultCAM" type="Node3D"]
@@ -31,7 +26,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 mesh = SubResource("ArrayMesh_f85tf")
 
 [node name="Base" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(0.51, 0, 0, 0, 0.051, 0, 0, 0, 0.51, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.05, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("CylinderMesh_xgldc")
 
 [node name="Dome" type="MeshInstance3D" parent="MeshInstance3D"]
@@ -53,7 +48,6 @@ script = ExtResource("1_qpqen")
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
 
 [node name="RayCast3D" type="RayCast3D" parent="Node3D/Camera3D"]
-target_position = Vector3(0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, -2.18557e-06, -1, 0, 50, -4.37114e-08, 0, 0, 0)
 collide_with_areas = true
-collide_with_bodies = false
 script = ExtResource("1_easup")
