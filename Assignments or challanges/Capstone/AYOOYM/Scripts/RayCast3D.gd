@@ -2,15 +2,14 @@ extends RayCast3D
 
 
 func _physics_process(delta):
-	if is_colliding():
-		print("collide")
+
 		
 func _input(event):
 	if event.is_action_pressed("CamSwitch"):
-		scale.y = 50
+		target_position.z = 50
 		print("Extend")
 	elif event.is_action_released("CamSwitch"):
-		scale.y = 1
+		target_position.z = 1
 		print("Shortend")
 		
 		
