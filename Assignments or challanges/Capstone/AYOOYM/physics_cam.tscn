@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxsnwpco46ey"]
+[gd_scene load_steps=10 format=3 uid="uid://cxsnwpco46ey"]
 
 [ext_resource type="Script" path="res://Scripts/HeadMovements.gd" id="1_f64nj"]
 [ext_resource type="Script" path="res://Scripts/RayCast3D.gd" id="2_37157"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8m0mw"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_f85tf"]
 
@@ -29,6 +31,13 @@ height = 0.5
 is_hemisphere = true
 
 [node name="PhysicsCAM" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4)
+shape = SubResource("SphereShape3D_8m0mw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
