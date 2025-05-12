@@ -54,6 +54,6 @@ script = ExtResource("1_qpqen")
 
 [node name="RayCast3D" type="RayCast3D" parent="Node3D/Camera3D"]
 target_position = Vector3(0, 0, -1)
+hit_from_inside = true
 collide_with_areas = true
-collide_with_bodies = false
 script = ExtResource("1_easup")

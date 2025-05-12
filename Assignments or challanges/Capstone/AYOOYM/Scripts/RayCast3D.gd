@@ -2,7 +2,8 @@ extends RayCast3D
 
 
 func _physics_process(delta):
-	pass
+	if is_colliding():
+		print("collide")
 		
 func _input(event):
 	if event.is_action_pressed("CamSwitch"):
