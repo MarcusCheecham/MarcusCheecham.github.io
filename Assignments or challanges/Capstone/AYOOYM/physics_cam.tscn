@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxsnwpco46ey"]
+[gd_scene load_steps=11 format=3 uid="uid://cxsnwpco46ey"]
 
 [ext_resource type="Script" path="res://Scripts/HeadMovements.gd" id="1_f64nj"]
+[ext_resource type="Script" path="res://Scripts/CamSwitch.gd" id="1_ispsl"]
 [ext_resource type="Script" path="res://Scripts/RayCast3D.gd" id="2_37157"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8m0mw"]
@@ -34,6 +35,7 @@ is_hemisphere = true
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
+script = ExtResource("1_ispsl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4)
@@ -59,12 +61,14 @@ lod_bias = 0.001
 mesh = SubResource("SphereMesh_qdl1n")
 skeleton = NodePath("../Dome")
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="CamNeck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15)
 script = ExtResource("1_f64nj")
 
-[node name="Camera3D" type="Camera3D" parent="Node3D"]
+[node name="Camera3D" type="Camera3D" parent="CamNeck"]
 
-[node name="RayCast3D" type="RayCast3D" parent="Node3D/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, -2.18557e-06, -1, 0, 50, -4.37114e-08, 0, 0, 0)
+[node name="RayCast3D" type="RayCast3D" parent="CamNeck/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
+target_position = Vector3(0, 0, -1)
+collide_with_areas = true
 script = ExtResource("2_37157")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://fmosmk7xgtoj"]
+[gd_scene load_steps=9 format=3 uid="uid://fmosmk7xgtoj"]
 
 [ext_resource type="Script" path="res://Scripts/RayCast3D.gd" id="1_easup"]
+[ext_resource type="Script" path="res://Scripts/CamSwitch.gd" id="1_h5xba"]
 [ext_resource type="Script" path="res://Scripts/HeadMovements.gd" id="1_qpqen"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_u3m4j"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_du2sb"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_f85tf"]
 
@@ -30,22 +31,11 @@ is_hemisphere = true
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
+script = ExtResource("1_h5xba")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4)
-shape = SubResource("SphereShape3D_u3m4j")
-
-[node name="CamNeck" type="Node3D" parent="Area3D/CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15)
-script = ExtResource("1_qpqen")
-
-[node name="Camera3D" type="Camera3D" parent="Area3D/CollisionShape3D/CamNeck"]
-
-[node name="RayCast3D" type="RayCast3D" parent="Area3D/CollisionShape3D/CamNeck/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
-target_position = Vector3(0, 0, -1)
-collide_with_areas = true
-script = ExtResource("1_easup")
+shape = SubResource("SphereShape3D_du2sb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
@@ -66,3 +56,15 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 lod_bias = 0.001
 mesh = SubResource("SphereMesh_ld45n")
 skeleton = NodePath("../Dome")
+
+[node name="CamNeck" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15)
+script = ExtResource("1_qpqen")
+
+[node name="Camera3D" type="Camera3D" parent="CamNeck"]
+
+[node name="RayCast3D" type="RayCast3D" parent="CamNeck/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
+target_position = Vector3(0, 0, -1)
+collide_with_areas = true
+script = ExtResource("1_easup")

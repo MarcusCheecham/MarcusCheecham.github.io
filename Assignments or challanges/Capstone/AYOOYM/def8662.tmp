@@ -1,24 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://cs7kq20dlemre"]
+[gd_scene load_steps=9 format=3 uid="uid://fmosmk7xgtoj"]
 
-[ext_resource type="Script" path="res://Scripts/CamSwitch.gd" id="1_7oag6"]
-[ext_resource type="Script" path="res://Scripts/HeadMovements.gd" id="1_hke8f"]
-[ext_resource type="Script" path="res://Scripts/RayCast3D.gd" id="2_umm42"]
+[ext_resource type="Script" path="res://Scripts/RayCast3D.gd" id="1_easup"]
+[ext_resource type="Script" path="res://Scripts/CamSwitch.gd" id="1_h5xba"]
+[ext_resource type="Script" path="res://Scripts/HeadMovements.gd" id="1_qpqen"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_e50u7"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_f85tf"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_jytux"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_r8yve"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_xgldc"]
 radial_segments = 30
 rings = 1
 cap_bottom = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6r67t"]
-albedo_color = Color(0.464993, 0.364842, 9.62615e-08, 1)
+albedo_color = Color(0, 0, 0, 1)
 metallic = 0.62
 roughness = 0.81
-emission_enabled = true
-emission = Color(0.984226, 0.795671, 0, 1)
 clearcoat_enabled = true
 clearcoat_roughness = 0.25
 
@@ -29,23 +25,17 @@ radial_segments = 35
 rings = 16
 is_hemisphere = true
 
-[node name="CheckpointCAM" type="Node3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_du2sb"]
 
-[node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
-script = ExtResource("1_7oag6")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4)
-shape = SubResource("SphereShape3D_e50u7")
+[node name="DefaultCAM" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("ArrayMesh_jytux")
+mesh = SubResource("ArrayMesh_f85tf")
 
 [node name="Base" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(0.51, 0, 0, 0, 0.051, 0, 0, 0, 0.51, 0, 0, 0)
-mesh = SubResource("CylinderMesh_r8yve")
+mesh = SubResource("CylinderMesh_xgldc")
 
 [node name="Dome" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -59,9 +49,17 @@ lod_bias = 0.001
 mesh = SubResource("SphereMesh_ld45n")
 skeleton = NodePath("../Dome")
 
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
+script = ExtResource("1_h5xba")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4)
+shape = SubResource("SphereShape3D_du2sb")
+
 [node name="CamNeck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15)
-script = ExtResource("1_hke8f")
+script = ExtResource("1_qpqen")
 
 [node name="Camera3D" type="Camera3D" parent="CamNeck"]
 
@@ -69,4 +67,4 @@ script = ExtResource("1_hke8f")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
 target_position = Vector3(0, 0, -1)
 collide_with_areas = true
-script = ExtResource("2_umm42")
+script = ExtResource("1_easup")
