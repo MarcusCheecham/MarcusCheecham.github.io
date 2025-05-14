@@ -20,9 +20,9 @@ glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yhb6f"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_iu7b0"]
+[sub_resource type="BoxMesh" id="BoxMesh_65x20"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_nwp5n"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_k6gtn"]
 
 [node name="Level" type="Node3D"]
 
@@ -48,12 +48,12 @@ transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107
 
 [node name="UI" parent="." instance=ExtResource("1_wxxfk")]
 
-[node name="Wall" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)
+[node name="wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 0.25, 5, 0, 0)
+mesh = SubResource("BoxMesh_65x20")
+skeleton = NodePath("wall")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
-shape = SubResource("BoxShape3D_iu7b0")
+[node name="wall" type="Area3D" parent="wall"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall/CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.394959, 0, 0)
-mesh = SubResource("BoxMesh_nwp5n")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall/wall"]
+shape = SubResource("BoxShape3D_k6gtn")
