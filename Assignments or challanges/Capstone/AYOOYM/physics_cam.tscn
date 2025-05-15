@@ -4,7 +4,8 @@
 [ext_resource type="Script" path="res://Scripts/CamSwitch.gd" id="1_ispsl"]
 [ext_resource type="Script" path="res://Scripts/RayCast3D.gd" id="2_37157"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_8m0mw"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_0fa4g"]
+size = Vector3(0.7, 0.7, 0.7)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_f85tf"]
 
@@ -32,14 +33,14 @@ height = 0.5
 is_hemisphere = true
 
 [node name="PhysicsCAM" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.05)
 
 [node name="Camera" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
 script = ExtResource("1_ispsl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4)
-shape = SubResource("SphereShape3D_8m0mw")
+shape = SubResource("BoxShape3D_0fa4g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)

@@ -4,7 +4,8 @@
 [ext_resource type="Script" path="res://Scripts/CamSwitch.gd" id="1_h5xba"]
 [ext_resource type="Script" path="res://Scripts/HeadMovements.gd" id="1_qpqen"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_du2sb"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ikyex"]
+size = Vector3(0.7, 0.7, 0.7)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_f85tf"]
 
@@ -17,8 +18,11 @@ cap_bottom = false
 albedo_color = Color(0, 0, 0, 1)
 metallic = 0.62
 roughness = 0.81
+emission_enabled = true
+normal_enabled = true
 clearcoat_enabled = true
 clearcoat_roughness = 0.25
+refraction_scale = -0.1
 
 [sub_resource type="SphereMesh" id="SphereMesh_ld45n"]
 material = SubResource("StandardMaterial3D_6r67t")
@@ -28,14 +32,14 @@ rings = 16
 is_hemisphere = true
 
 [node name="DefaultCAM" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.05)
 
 [node name="Camera" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
 script = ExtResource("1_h5xba")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4)
-shape = SubResource("SphereShape3D_du2sb")
+shape = SubResource("BoxShape3D_ikyex")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
@@ -64,6 +68,7 @@ script = ExtResource("1_qpqen")
 [node name="Camera3D" type="Camera3D" parent="CamNeck"]
 
 [node name="RayCast3D" type="RayCast3D" parent="CamNeck/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
+target_position = Vector3(0, 0, -1)
 collide_with_areas = true
 script = ExtResource("1_easup")

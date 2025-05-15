@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bc5ii4m0vb6fn"]
 
 [ext_resource type="PackedScene" uid="uid://fmosmk7xgtoj" path="res://default_cam.tscn" id="1_ik6pk"]
-[ext_resource type="PackedScene" uid="uid://bdqoiptdbik4a" path="res://ui.tscn" id="1_wxxfk"]
+[ext_resource type="PackedScene" uid="uid://p03ucih1g34o" path="res://ui.tscn" id="1_wxxfk"]
 [ext_resource type="PackedScene" uid="uid://cxsnwpco46ey" path="res://physics_cam.tscn" id="2_ktvms"]
 [ext_resource type="PackedScene" uid="uid://cs7kq20dlemre" path="res://checkpoint_cam.tscn" id="3_742ln"]
 
@@ -55,5 +55,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)
 shape = SubResource("BoxShape3D_iu7b0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Wall/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.394959, 0, 0)
+mesh = SubResource("BoxMesh_nwp5n")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_iu7b0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/CollisionShape3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.394959, 0, 0)
 mesh = SubResource("BoxMesh_nwp5n")
