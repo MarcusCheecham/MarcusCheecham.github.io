@@ -1,9 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://bc5ii4m0vb6fn"]
+[gd_scene load_steps=13 format=3 uid="uid://bc5ii4m0vb6fn"]
 
 [ext_resource type="PackedScene" uid="uid://fmosmk7xgtoj" path="res://default_cam.tscn" id="1_ik6pk"]
 [ext_resource type="PackedScene" uid="uid://p03ucih1g34o" path="res://ui.tscn" id="1_wxxfk"]
 [ext_resource type="PackedScene" uid="uid://cxsnwpco46ey" path="res://physics_cam.tscn" id="2_ktvms"]
 [ext_resource type="PackedScene" uid="uid://cs7kq20dlemre" path="res://checkpoint_cam.tscn" id="3_742ln"]
+[ext_resource type="PackedScene" uid="uid://enyf5rpnb32r" path="res://physic_box.tscn" id="5_5m3g4"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yhb6f"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6imwv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oybpj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,13 +23,21 @@ sky = SubResource("Sky_e66tg")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_yhb6f"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_iu7b0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_nwp5n"]
 
 [node name="Level" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_yhb6f")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_6imwv")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mya0b")
@@ -33,12 +46,8 @@ environment = SubResource("Environment_mya0b")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
-mesh = SubResource("PlaneMesh_yhb6f")
-
 [node name="DefaultCAM" parent="." instance=ExtResource("1_ik6pk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012393, 1, 4.99773)
 
 [node name="PhysicsCAM" parent="." instance=ExtResource("2_ktvms")]
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -5, 1, -5)
@@ -58,3 +67,6 @@ shape = SubResource("BoxShape3D_iu7b0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00319767, 0, 0)
 transparency = 0.5
 mesh = SubResource("BoxMesh_nwp5n")
+
+[node name="PhysicBox" parent="." instance=ExtResource("5_5m3g4")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -4, 2, 0)
