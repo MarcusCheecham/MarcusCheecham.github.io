@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://fmosmk7xgtoj"]
+[gd_scene load_steps=10 format=3 uid="uid://fmosmk7xgtoj"]
 
 [ext_resource type="Script" path="res://Scripts/RayCast3D.gd" id="1_easup"]
 [ext_resource type="Script" path="res://Scripts/CamSwitch.gd" id="1_h5xba"]
 [ext_resource type="Script" path="res://Scripts/HeadMovements.gd" id="1_qpqen"]
+[ext_resource type="Texture2D" uid="uid://c6hget6fmfnrn" path="res://icon.svg" id="4_xdblr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ikyex"]
 size = Vector3(0.7, 0.7, 0.7)
@@ -73,3 +74,6 @@ enabled = false
 target_position = Vector3(0, 0, -25)
 collide_with_areas = true
 script = ExtResource("1_easup")
+
+[node name="Decal" type="Decal" parent="."]
+texture_albedo = ExtResource("4_xdblr")
