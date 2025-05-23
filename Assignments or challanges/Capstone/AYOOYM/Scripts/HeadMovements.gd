@@ -9,7 +9,7 @@ func _unhandled_input(event):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
-			rotation_degrees.y -= event.relative.x * sens
-			rotation_degrees.y = clamp(rotation_degrees.y, -80.0, 80.0)
-			$Camera3D.rotation_degrees.x -= event.relative.y * sens
-			$Camera3D.rotation_degrees.x = clamp($Camera3D.rotation_degrees.x, -60.0, 60.0)
+			rotation_degrees.x += event.relative.x * sens 
+			#rotation_degrees.y = clamp(rotation_degrees.y, -80.0, 80.0)
+			$Camera3D.rotation_degrees.y -= event.relative.y * sens
+			$Camera3D.rotation_degrees.y = clamp($Camera3D.rotation_degrees.y, -90.0, 25.0)
