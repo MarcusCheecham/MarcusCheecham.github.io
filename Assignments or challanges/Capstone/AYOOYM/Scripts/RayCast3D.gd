@@ -18,15 +18,23 @@ func _input(event):
 		if event.is_action_pressed("CamSwitch"):
 			force_raycast_update()
 			print("Fire!")
+	#if event.is_action_pressed("Ability") && get_node("..").current == true:
+		#
 			
 func _physicsInteraction():
 	print("Activated!")
 	force_raycast_update()
-	print(get_collider())
 	if is_colliding() && get_collider().name == "RigidBody3D":
+		print(get_collider())
 		print("noticed!")
 		#get_collider().linear_velocity.y = 5
 		print("Normal:", get_collision_normal(), " Point:", get_collision_point())
 		var bul = decal.instantiate()
 		get_collider().add_child(bul)
 		bul.global_transform.origin = get_collision_point()
+	else:
+		print(get_collider())
+		print("Normal:", get_collision_normal(), " Point:", get_collision_point())
+		print(position.distance_to(get_collision_point()))
+		
+		

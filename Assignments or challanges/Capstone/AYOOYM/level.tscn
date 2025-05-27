@@ -58,7 +58,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="DefaultCAM" parent="." instance=ExtResource("1_ik6pk")]
-transform = Transform3D(1, 0, 0, 0, 0.999246, -0.0388237, 0, 0.0388237, 0.999246, 0.012, 2, 4.998)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 5)
 
 [node name="PhysicsCAM" parent="." instance=ExtResource("2_ktvms")]
 transform = Transform3D(-0.707107, 0.707107, 3.09086e-08, 0, -4.37114e-08, 1, 0.707107, 0.707107, 3.09086e-08, -5, 2, -5)
@@ -72,6 +72,7 @@ transform = Transform3D(-0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.52176, 1.03815, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.865422, 0)
 shape = SubResource("BoxShape3D_iu7b0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/CollisionShape3D"]
