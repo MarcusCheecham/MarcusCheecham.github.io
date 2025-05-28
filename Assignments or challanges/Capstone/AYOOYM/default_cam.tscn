@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://fmosmk7xgtoj"]
+[gd_scene load_steps=10 format=3 uid="uid://fmosmk7xgtoj"]
 
 [ext_resource type="Script" path="res://Scripts/RayCast3D.gd" id="1_easup"]
 [ext_resource type="Script" path="res://Scripts/CamSwitch.gd" id="1_h5xba"]
+[ext_resource type="Script" path="res://ElectricAbilitty.gd" id="1_mlfb3"]
 [ext_resource type="Script" path="res://Scripts/HeadMovements.gd" id="1_qpqen"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ikyex"]
@@ -33,6 +34,7 @@ is_hemisphere = true
 
 [node name="DefaultCAM" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.05)
+script = ExtResource("1_mlfb3")
 
 [node name="Camera" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
