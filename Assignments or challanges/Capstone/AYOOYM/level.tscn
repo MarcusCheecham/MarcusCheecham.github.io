@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bc5ii4m0vb6fn"]
+[gd_scene load_steps=21 format=3 uid="uid://bc5ii4m0vb6fn"]
 
 [ext_resource type="PackedScene" uid="uid://fmosmk7xgtoj" path="res://default_cam.tscn" id="1_ik6pk"]
 [ext_resource type="PackedScene" uid="uid://p03ucih1g34o" path="res://ui.tscn" id="1_wxxfk"]
 [ext_resource type="PackedScene" uid="uid://cxsnwpco46ey" path="res://physics_cam.tscn" id="2_ktvms"]
 [ext_resource type="PackedScene" uid="uid://cs7kq20dlemre" path="res://checkpoint_cam.tscn" id="3_742ln"]
 [ext_resource type="PackedScene" uid="uid://enyf5rpnb32r" path="res://physic_box.tscn" id="5_5m3g4"]
+[ext_resource type="PackedScene" uid="uid://by2rn6yq015m3" path="res://Interactable.tscn" id="6_fstgg"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yhb6f"]
 lightmap_size_hint = Vector2i(12, 12)
@@ -24,11 +25,39 @@ sky = SubResource("Sky_e66tg")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_iu7b0"]
+[sub_resource type="BoxMesh" id="BoxMesh_8l7an"]
+size = Vector3(1, 5, 30)
 
-[sub_resource type="BoxMesh" id="BoxMesh_nwp5n"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_pq2s1"]
+size = Vector3(1, 5, 20)
 
-[node name="Level" type="Node3D"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_3jhis"]
+flip_faces = true
+size = Vector2(20, 5)
+center_offset = Vector3(-0.5, 0, 0)
+orientation = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vycdd"]
+flip_faces = true
+size = Vector2(10, 10)
+center_offset = Vector3(0, -0.5, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xwxfw"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_e8dj3"]
+size = Vector2(10, 35)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pcobl"]
+size = Vector3(2.5, 5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yaege"]
+size = Vector3(2, 2.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rpgnv"]
+size = Vector3(2.5, 5, 1)
+
+[node name="TEST" type="Node3D"]
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="."]
 transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 3.87022, -0.172703)
@@ -67,21 +96,107 @@ transform = Transform3D(-0.707107, 0.707107, 3.09086e-08, 0, -4.37114e-08, 1, 0.
 transform = Transform3D(-0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, -0.707107, 0.707107, 3.09086e-08, 5, 2, -5)
 
 [node name="UI" parent="." instance=ExtResource("1_wxxfk")]
-
-[node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.52176, 1.03815, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.865422, 0)
-shape = SubResource("BoxShape3D_iu7b0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00319767, 0, 0)
-transparency = 0.5
-mesh = SubResource("BoxMesh_nwp5n")
+unique_name_in_owner = true
 
 [node name="PhysicBox" parent="." instance=ExtResource("5_5m3g4")]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -4, 2, 0)
 
+[node name="DefaultCAM" parent="PhysicBox/Physics" index="0" instance=ExtResource("1_ik6pk")]
+transform = Transform3D(-0.0494873, 0.0105188, -0.998719, 0.207912, 0.978147, -2.98023e-08, 0.976894, -0.207645, -0.0505929, 0.492944, 0.0166483, -0.0303538)
+
 [node name="DefaultCAM2" parent="." instance=ExtResource("1_ik6pk")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.83825, -0.05)
+
+[node name="Interactables" parent="." instance=ExtResource("6_fstgg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8799, 0, 0.155811)
+
+[node name="Button" parent="Interactables" index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.98712, 0, 1)
+
+[node name="Door" parent="Interactables" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1.5)
+constant_linear_velocity = Vector3(0, 1, 0)
+constant_angular_velocity = Vector3(0, 0.0174533, 0)
+
+[node name="MapBuilding" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6278, 0, 0)
+
+[node name="DefaultCAM" parent="MapBuilding" instance=ExtResource("1_ik6pk")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.86551, 3.78156, 13.9519)
+
+[node name="Lights" type="Node3D" parent="MapBuilding"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MapBuilding/Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.7139, 1.65654, 9.62886)
+spot_angle = 88.8693
+
+[node name="Building" type="Node3D" parent="MapBuilding"]
+
+[node name="Wall" type="StaticBody3D" parent="MapBuilding/Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.316, 2, -5.09374)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapBuilding/Building/Wall"]
+mesh = SubResource("BoxMesh_8l7an")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MapBuilding/Building/Wall"]
+shape = SubResource("BoxShape3D_pq2s1")
+
+[node name="Wall2" type="StaticBody3D" parent="MapBuilding/Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74017, 2, 4.34654)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapBuilding/Building/Wall2"]
+mesh = SubResource("PlaneMesh_3jhis")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MapBuilding/Building/Wall2"]
+shape = SubResource("BoxShape3D_pq2s1")
+
+[node name="Roof" type="StaticBody3D" parent="MapBuilding/Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.67269, 4.33068, 14.1834)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapBuilding/Building/Roof"]
+mesh = SubResource("PlaneMesh_vycdd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MapBuilding/Building/Roof"]
+shape = SubResource("BoxShape3D_xwxfw")
+
+[node name="Floor2" type="MeshInstance3D" parent="MapBuilding/Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74726, 0, -3.16067)
+mesh = SubResource("PlaneMesh_e8dj3")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MapBuilding/Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64737, 3.57013, 8.8665)
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="MapBuilding/Building/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.59515, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapBuilding/Building/StaticBody3D/MultiMeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87558, 0, 0)
+mesh = SubResource("BoxMesh_pcobl")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MapBuilding/Building/StaticBody3D/MultiMeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.831637, 0)
+mesh = SubResource("BoxMesh_yaege")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MapBuilding/Building/StaticBody3D/MultiMeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+mesh = SubResource("BoxMesh_rpgnv")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="MapBuilding/Building/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0372725)
+polygon = PackedVector2Array(-3.3, -4, -3.2, 0.9, 3, 1, 3, -4, 0.7, -4, 0.7, -2, -0.8, -2, -0.8, -4)
+
+[node name="Interactables" parent="MapBuilding" instance=ExtResource("6_fstgg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.69308, 0, 9.67397)
+
+[node name="Button" parent="MapBuilding/Interactables" index="0"]
+transform = Transform3D(-2.60627e-16, 5.96244e-09, -0.5, -0.5, -2.18557e-08, 0, -2.18557e-08, 0.5, 5.96244e-09, -1.85688, 0.855593, -0.275013)
+
+[node name="Door" parent="MapBuilding/Interactables" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00542355, 0.850219, -0.559809)
+
+[editable path="PhysicBox"]
+[editable path="Interactables"]
+[editable path="MapBuilding/Interactables"]

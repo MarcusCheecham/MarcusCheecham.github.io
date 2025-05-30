@@ -1,33 +1,53 @@
-[gd_scene load_steps=5 format=3 uid="uid://by2rn6yq015m3"]
+[gd_scene load_steps=8 format=3 uid="uid://by2rn6yq015m3"]
+
+[ext_resource type="Script" path="res://Button trigger.gd" id="1_674w3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_glc7x"]
 size = Vector3(1.75, 0.5, 1.25)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmbv7"]
+albedo_color = Color(0, 1, 1, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_6reax"]
+material = SubResource("StandardMaterial3D_vmbv7")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yi6p3"]
+size = Vector3(1.5, 2, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e16r7"]
+albedo_color = Color(0, 0.642427, 0.642427, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_vwhu4"]
+material = SubResource("StandardMaterial3D_e16r7")
+size = Vector3(1.5, 2, 0.5)
 
-[node name="Node3D" type="Node3D"]
+[node name="Interactables" type="Node3D"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+[node name="Button" type="StaticBody3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 1)
+script = ExtResource("1_674w3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
 shape = SubResource("BoxShape3D_glc7x")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Button"]
 transform = Transform3D(1.5, 0, 0, 0, 0.25, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_6reax")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="Button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.281118, 0)
+light_color = Color(0.204403, 0.905738, 0.920407, 1)
+light_energy = 0.5
+omni_range = 0.5
+omni_attenuation = 0.00060371
+
+[node name="Door" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
 shape = SubResource("BoxShape3D_yi6p3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door"]
 mesh = SubResource("BoxMesh_vwhu4")
 skeleton = NodePath("../CollisionShape3D")

@@ -10,11 +10,11 @@ material = SubResource("StandardMaterial3D_pyada")
 
 [node name="PhysicBox" type="Node3D"]
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="Physics" type="RigidBody3D" parent="."]
 linear_velocity = Vector3(0, -3, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Physics"]
 shape = SubResource("BoxShape3D_ut5im")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Physics"]
 mesh = SubResource("BoxMesh_qllim")

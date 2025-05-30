@@ -1,11 +1,14 @@
 extends Node3D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@onready var ray = get_node("CamNeck/Camera3D/RayCast3D")
+@onready var cam = get_node("CamNeck/Camera3D")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _input(event):
+	if event.is_action_pressed("Ability") && cam.current == true:
+		print("Activated!")
+		ray.force_raycast_update()
+		if ray.is_colliding() && ray.get_collider().name == "Button":
+			ray.get_collider()._trigger()
+			
