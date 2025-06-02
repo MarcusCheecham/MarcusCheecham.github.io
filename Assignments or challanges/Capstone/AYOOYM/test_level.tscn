@@ -1,0 +1,137 @@
+[gd_scene load_steps=14 format=3 uid="uid://dra7ul4rbuomu"]
+
+[ext_resource type="PackedScene" uid="uid://fmosmk7xgtoj" path="res://default_cam.tscn" id="1_g4jh4"]
+[ext_resource type="PackedScene" uid="uid://cxsnwpco46ey" path="res://physics_cam.tscn" id="2_keebn"]
+[ext_resource type="PackedScene" uid="uid://by2rn6yq015m3" path="res://Interactable.tscn" id="2_pysvb"]
+[ext_resource type="PackedScene" uid="uid://enyf5rpnb32r" path="res://physic_box.tscn" id="4_43qp6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rgo5a"]
+size = Vector3(1, 5, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uqce6"]
+size = Vector3(1, 5, 20)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_t6ts2"]
+flip_faces = true
+size = Vector2(20, 5)
+center_offset = Vector3(-0.5, 0, 0)
+orientation = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_44xah"]
+flip_faces = true
+size = Vector2(10, 10)
+center_offset = Vector3(0, -0.5, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gwi7e"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_alwds"]
+size = Vector2(10, 35)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xjc11"]
+size = Vector3(2.5, 5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d8034"]
+size = Vector3(2, 2.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0l07y"]
+size = Vector3(2.5, 5, 1)
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="MapBuilding" type="Node3D" parent="."]
+
+[node name="DefaultCAM" parent="MapBuilding" instance=ExtResource("1_g4jh4")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.86551, 3.78156, 13.9519)
+
+[node name="PhysicsCAM" parent="MapBuilding" instance=ExtResource("2_keebn")]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, -1.74552, 0, 7.53345)
+
+[node name="CamNeck" parent="MapBuilding/PhysicsCAM" index="2"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0, 0, -0.15)
+
+[node name="Lights" type="Node3D" parent="MapBuilding"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MapBuilding/Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.7139, 1.65654, 9.62886)
+spot_angle = 88.8693
+
+[node name="Building" type="Node3D" parent="MapBuilding"]
+
+[node name="Wall" type="StaticBody3D" parent="MapBuilding/Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.316, 2, -5.09374)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapBuilding/Building/Wall"]
+mesh = SubResource("BoxMesh_rgo5a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MapBuilding/Building/Wall"]
+shape = SubResource("BoxShape3D_uqce6")
+
+[node name="Wall2" type="StaticBody3D" parent="MapBuilding/Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74017, 2, 4.34654)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapBuilding/Building/Wall2"]
+mesh = SubResource("PlaneMesh_t6ts2")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MapBuilding/Building/Wall2"]
+shape = SubResource("BoxShape3D_uqce6")
+
+[node name="Roof" type="StaticBody3D" parent="MapBuilding/Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.67269, 4.33068, 14.1834)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapBuilding/Building/Roof"]
+mesh = SubResource("PlaneMesh_44xah")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MapBuilding/Building/Roof"]
+shape = SubResource("BoxShape3D_gwi7e")
+
+[node name="Floor2" type="MeshInstance3D" parent="MapBuilding/Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74726, 0, -3.16067)
+mesh = SubResource("PlaneMesh_alwds")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MapBuilding/Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64737, 3.57013, 8.8665)
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="MapBuilding/Building/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.59515, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapBuilding/Building/StaticBody3D/MultiMeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87558, 0, 0)
+mesh = SubResource("BoxMesh_xjc11")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MapBuilding/Building/StaticBody3D/MultiMeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.831637, 0)
+mesh = SubResource("BoxMesh_d8034")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MapBuilding/Building/StaticBody3D/MultiMeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+mesh = SubResource("BoxMesh_0l07y")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="MapBuilding/Building/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0372725)
+polygon = PackedVector2Array(-3.3, -4, -3.2, 0.9, 3, 1, 3, -4, 0.7, -4, 0.7, -2, -0.8, -2, -0.8, -4)
+
+[node name="Interactables" parent="MapBuilding" instance=ExtResource("2_pysvb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.69308, 0, 9.67397)
+
+[node name="Button" parent="MapBuilding/Interactables" index="0"]
+transform = Transform3D(-2.60627e-16, 5.96244e-09, -0.5, -0.5, -2.18557e-08, 0, -2.18557e-08, 0.5, 5.96244e-09, -1.85688, 0.855593, -0.275013)
+
+[node name="Door" parent="MapBuilding/Interactables" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00542355, 0.850219, -0.559809)
+
+[node name="PhysicBox" parent="MapBuilding/Interactables" instance=ExtResource("4_43qp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92861, 0.548216, -4.55566)
+
+[node name="Physics" parent="MapBuilding/Interactables/PhysicBox" index="0"]
+lock_rotation = true
+
+[node name="DefaultCAM" parent="MapBuilding/Interactables/PhysicBox" instance=ExtResource("1_g4jh4")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0.526057)
+
+[editable path="MapBuilding/PhysicsCAM"]
+[editable path="MapBuilding/Interactables"]
+[editable path="MapBuilding/Interactables/PhysicBox"]

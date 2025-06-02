@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjp3i5wi3ciu3"]
+
+[ext_resource type="PackedScene" uid="uid://p03ucih1g34o" path="res://ui.tscn" id="1_6874v"]
+[ext_resource type="PackedScene" uid="uid://dra7ul4rbuomu" path="res://test_level.tscn" id="2_lxqh5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n0g37"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_e66tg"]
+sky_material = SubResource("ProceduralSkyMaterial_n0g37")
+
+[sub_resource type="Environment" id="Environment_a7k7l"]
+background_mode = 2
+sky = SubResource("Sky_e66tg")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="WorldEnviorment" type="Node3D"]
+
+[node name="Basics" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Basics"]
+environment = SubResource("Environment_a7k7l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Basics"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="UI" parent="Basics" instance=ExtResource("1_6874v")]
+
+[node name="Levels" type="Node3D" parent="."]
+
+[node name="TestLevel" parent="Levels" instance=ExtResource("2_lxqh5")]
+visible = false

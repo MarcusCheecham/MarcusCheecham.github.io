@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cxsnwpco46ey"]
+[gd_scene load_steps=11 format=3 uid="uid://cxsnwpco46ey"]
 
 [ext_resource type="Script" path="res://Scripts/PhysicsAbility.gd" id="1_0u8f6"]
 [ext_resource type="Script" path="res://Scripts/HeadMovements.gd" id="1_f64nj"]
-[ext_resource type="Script" path="res://Scripts/CamSwitch.gd" id="1_ispsl"]
 [ext_resource type="Script" path="res://Scripts/RayCast3D.gd" id="2_37157"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0fa4g"]
@@ -39,7 +38,6 @@ script = ExtResource("1_0u8f6")
 
 [node name="Camera" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
-script = ExtResource("1_ispsl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera"]
 shape = SubResource("BoxShape3D_0fa4g")

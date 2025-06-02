@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://fmosmk7xgtoj"]
+[gd_scene load_steps=9 format=3 uid="uid://fmosmk7xgtoj"]
 
 [ext_resource type="Script" path="res://Scripts/RayCast3D.gd" id="1_easup"]
-[ext_resource type="Script" path="res://Scripts/CamSwitch.gd" id="1_h5xba"]
 [ext_resource type="Script" path="res://ElectricAbilitty.gd" id="1_mlfb3"]
 [ext_resource type="Script" path="res://Scripts/HeadMovements.gd" id="1_qpqen"]
 
@@ -38,7 +37,6 @@ script = ExtResource("1_mlfb3")
 
 [node name="Camera" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
-script = ExtResource("1_h5xba")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera"]
 shape = SubResource("BoxShape3D_ikyex")
@@ -59,6 +57,7 @@ mesh = SubResource("SphereMesh_ld45n")
 
 [node name="Dome2" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+transparency = 0.01
 lod_bias = 0.001
 mesh = SubResource("SphereMesh_ld45n")
 skeleton = NodePath("../Dome")

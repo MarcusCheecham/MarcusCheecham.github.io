@@ -8,14 +8,17 @@ func _process(delta):
 	if is_colliding() && Input.is_action_pressed("CamSwitch") && get_collider().name == "Camera" && get_node("..").current == true:
 		if collition == false:
 			print(get_collider())
+			var cam = get_collider().get_node("../CamNeck/Camera3D")
 			#get_collider()._switch()
 			collition = true
-			var Countdown = find_child("%UI").RichTextLabel	
+			var Countdown = get_node("/root/TEST/UI/RichTextLabel")
 			for i in range(3):
 				Countdown.text = str(i + 1)
 				print(i + 1)
 				await get_tree().create_timer(1.0).timeout
 			await get_tree().create_timer(0.01).timeout
+			cam.current = true
+			Countdown.text = ""
 			collition = false
 		
 func _input(event):
