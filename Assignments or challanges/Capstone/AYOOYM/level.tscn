@@ -89,5 +89,10 @@ constant_angular_velocity = Vector3(0, 0.0174533, 0)
 [node name="TestLevel" parent="." instance=ExtResource("7_n2qqb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2898, 0, 0)
 
+[node name="Switch timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+
 [editable path="PhysicBox"]
 [editable path="Interactables"]
