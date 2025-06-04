@@ -4,7 +4,7 @@ var collition = false
 
 @onready var decal = preload("res://decaltest.tscn")
 
-func _process(delta):
+func _process(_delta):
 	if is_colliding() && Input.is_action_pressed("CamSwitch") && get_collider().name == "Camera" && get_node("..").current == true:
 		if collition == false:
 			print(get_collider())
