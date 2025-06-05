@@ -5,34 +5,29 @@
 
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL);
-  angleMode(degrees);
+  createCanvas(600, 600);
 }
 
 function draw() {
-  background(220);
-  orbitControl();
-  colorMode(RGB, 255);
-  specularColor(100, 100, 100);
-  specularMaterial(150, 150, 150);
+  background(0);
 
-  noStroke();
-  colorMode(HSB, 100);
-  directionalLight(50, 100, 100, -1, 1, 0);
-  directionalLight(100, 0, 100, 1, -1, 0);
-
-  pentagonTorus(0, 0, 30);
-  sphere(5, 10, 10);
+  SierpinskiSquare(300, 300, 50);
 }
 
-function pentagonTorus(x, y, size) {
-  if (size >= 25) {
-
-    translate(x, y);
-    torus(size, 15, 3, 3);
-    sphere(5, 10, 10);
-    rotateZ(90);
-    pentagonTorus(x + 50, y+50, size-5);
-
+function SierpinskiSquare(x, y, size) {
+  
+  if (size >= 10) {
+    let Xi = x/2;
+    let Yi = y/2;
+    size -= 10;
+    // x -= Xi; y -= Yi;
+    for(y = Yi; y >= Yi*3; y += Yi) {
+      for(x = Xi; x >= Xi*3; x += Xi) {
+        // if (y != )
+        fill(255);
+        square(x, y, size);
+        SierpinskiSquare(x, y, size - 10);
+      }
+    }
   }
 }
